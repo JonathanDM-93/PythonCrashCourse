@@ -1,5 +1,5 @@
-# TRY IT YOURSELF pag 64
-# En esta ocasión no crearemos listas con string, ahora almacenaran números
+# TRY IT YOURSELF pág. 64
+# En esta ocasión no crearemos listas con string, ahora almacenarán números
 # Para crear una serie de números dentro de una lista podemos auxiliarnos
 # de la función range()
 
@@ -28,7 +28,7 @@ for item in range(0, 110, 10):
     jumpList.append(item)
 print(jumpList)
 # Observamos que en la linea 23 dentro de los parentesis del for
-# el 0 indica el inicio de la lista, el 110 el limite de la lista
+# el 0 indica el inicio de la lista, el 110 el límite de la lista
 # y el 10 es el salto que dara.
 
 print('\n[*]\n')
@@ -66,5 +66,5 @@ print('\n[*]\n')
 example: list = [valorexp**2 for valorexp in range(1, 11)]
 print(example)
 # Dentro de los corchetes primero se indica la el indicador que apunta a cada
-# elemento dentro de la lista, despues se ejecuta el for para cada elemento dentro
+# elemento dentro de la lista, después se ejecuta el for para cada elemento dentro
 # de la lista.
