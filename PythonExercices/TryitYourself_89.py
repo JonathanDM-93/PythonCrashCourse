@@ -42,3 +42,33 @@ elif edadTicket <= 17:
     print('Boleto de $ 55.00')
 else:
     print('Boleto de $ 80.00')
+
+
+print('\n[*]\n')
+
+# En el ejemplo anterior podemos hacer unas modificaciones para que sea un poco más claro
+# Quitaremos el else que en este caso no es necesario
+
+print('** Mejoramiento del ejemplo anterior **\n')
+print('El costo de las entradas son: \n')
+print('Mayores de 18 años $ 80.00 \n')
+print('Menores 18 años $ 55.00 \n')
+print('Menores a 5 años gratis \n')
+
+edadTicket: str = input('Ingresa tu edad para saber que tipo de boleto necesitas: ')
+edadTicket: int = int(edadTicket)
+if edadTicket <= 4:
+    valorTicket: int = 0
+    print('El costo de tu boleto es: $ ' + str(valorTicket))
+elif edadTicket in range(5, 17):
+    valorTicket: int = 55
+    print('El costo de tu boleto es: $ ' + str(valorTicket))
+elif edadTicket >= 18:
+    valorTicket: int = 80
+    print('El costo de tu boleto es: $ ' + str(valorTicket))
+
+# Bueno aqui vemos que parece que funciona mejor ya colocamos un condicional para
+# los niños que tienen <= 4 años pasen gratis. Las personas de 5 años a 17 pagan 55
+# y finalmente las personas con mas de 18 años pagan boleto de adulto.
+
+
