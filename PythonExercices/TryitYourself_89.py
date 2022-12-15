@@ -43,7 +43,6 @@ elif edadTicket <= 17:
 else:
     print('Boleto de $ 80.00')
 
-
 print('\n[*]\n')
 
 # En el ejemplo anterior podemos hacer unas modificaciones para que sea un poco más claro
@@ -67,8 +66,30 @@ elif edadTicket >= 18:
     valorTicket: int = 80
     print('El costo de tu boleto es: $ ' + str(valorTicket))
 
+print('\n[*]\n')
+
 # Bueno aqui vemos que parece que funciona mejor ya colocamos un condicional para
 # los niños que tienen <= 4 años pasen gratis. Las personas de 5 años a 17 pagan 55
-# y finalmente las personas con mas de 18 años pagan boleto de adulto.
+# y finalmente las personas con más de 18 años pagan boleto de adulto.
 
+# En el anterior ejemplo vemos que esta cadena de if-elif-else es un muy util; sin embargo,
+# solo es apropiado si cuando lo usamos solo necesitamos que alguna de las condiciones se cumpla.
+# Pero en ocasiones es necesario que todas las condiciones que se encuentran en nuestro programa sean
+# verificadas, en este caso únicamente deberíamos utilizar una serie de if consecutivos.
 
+someList: list = ['item1', 'item2']
+if 'item1' in someList:
+    print('El item1 si esta en la lista.')
+if 'item2' in someList:
+    print('El item2 esta en la lista.')
+if 'item3' in someList:
+    print('El item3 si esta la lista')
+if 'item4' in someList:
+    print('El item3 si esta la lista')
+
+# Las respuestas que se imprimen son:
+
+# El item1 si está en la lista.
+# El item2 está en la lista.
+
+# Como vemos el programa pasa por cada if e imprime el texto si la condición es verdadera.
