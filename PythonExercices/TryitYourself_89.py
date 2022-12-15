@@ -93,3 +93,6 @@ if 'item4' in someList:
 # El item2 está en la lista.
 
 # Como vemos el programa pasa por cada if e imprime el texto si la condición es verdadera.
+# En conclusión cuando sea necesario que mas de un bloque del codigo se ejecute usa una serie
+# de declaraciones de if independientes. Por otro lado si solo es necesario que se ejecute un bloque
+# utiliza las declaraciones if-elif.
