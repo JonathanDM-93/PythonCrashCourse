@@ -1,2 +1,2 @@
 # PythonCrashCourse
-Introducción a la programación con Python
+Introducción a la programación con Python Eric Mattes.
