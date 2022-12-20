@@ -41,4 +41,25 @@ for item in NewUser:
 
 # Porque dos de los nombres se repiten y el último no.
 
+print('\n[*]\n')
+
+# En el último ejemplo crearemos una lista con los numeros ordinales y crearemos una cadena
+# if-elif-else para que dependiendo del número que ingrese el usuario devuelva su posición
+# 1st, 2nd, 3rd, 4th etc.
+
+IngresaNum: str = input('Ingresa un número: ')
+if IngresaNum == str(0):
+    print('Cero es invalido')
+elif IngresaNum < str(2):
+    print(IngresaNum + 'st')
+elif IngresaNum < str(3):
+    print(IngresaNum + 'nd')
+elif IngresaNum < str(4):
+    print(IngresaNum + 'er')
+else:
+    print(IngresaNum + 'th')
+
+# Observamos que después del 3 todos los demás numeros terminan con th
+
+
 
