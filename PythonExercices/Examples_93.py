@@ -62,4 +62,20 @@ else:
 # Observamos que después del 3 todos los demás numeros terminan con th
 
 
+print('\n[*]\n')
+
+# En este ejemplo tenemos una lista de y queremos utilizar la cadena if-elif-else para poder imprimir
+# correctamente los números con su correspondiente posición 1st, 2nd, 3er etc.
+
+Nums: list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+for item in Nums:
+    if item == 1:
+        print(str(item) + 'st')
+    elif item == 2:
+        print(str(item) + 'nd')
+    elif item == 3:
+        print(str(item) + 'er')
+    else:
+        print(str(item) + 'th')
 
