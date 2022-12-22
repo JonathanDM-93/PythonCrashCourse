@@ -55,3 +55,36 @@ else:
 TanqueVel['Posicion_x'] = TanqueVel['Posicion_x'] + incremento_x
 print('Nueva posición: ' + str(TanqueVel['Posicion_x']))
 # Vemos que el tanque tiene una velocidad intermedia asi que solo aumenta en 2 la posicion en x
+
+print('\n[*]\n')
+
+# Remover un parte de la información dentro del diccionario, lo haremos a traves de la llave
+# Escribamos un diccionario nuevo:
+
+Tankremove: dict = {'Tanque': 'Panzer', 'Blindaje': 200, 'Remover': 0}
+# Ahora vamos a remover el la llave 'Romover' dentro del diccionario
+del Tankremove['Remover']
+# Veamos ahora como está nuestro diccionario
+print(Tankremove)
+# >> {'Tanque': 'Panzer', 'Blindaje': 200}
+# Se remueve permanentemente el elemento Llave-valor.
+
+print('\n[*]\n')
+
+# Como podemos ver en un Diccionario podemos guardar diferentes tipos de información sobre un objeto
+# Sin embargo, también podemos guardar un solo tipo de información sobre varios objetos.
+# Supongamos que queremos guardar los libros favoritos de algunas personas:
+
+LibrosFav: dict = {
+    'Jonathan': 'El Principito',
+    'Karen': 'Matando un Ruiseñor',
+    'Gina': 'Una ciudad en llamas',
+}
+
+# En esta ocasión escribimos de una forma disitinta el diccionario que parece ser mas legible al
+# momento de leer el programa vemos que en un solo renglón se escribe una llave-valor y asi
+# consecutivamente. Al final por buenas practicas podemos agregar una coma
+
+# Imprimamos algo usando el diccionario LibrosFav
+print('El libro favorito de Jonathan es ' + LibrosFav['Jonathan'])
+# >> {'Tanque': 'Panzer', 'Blindaje': 200}
