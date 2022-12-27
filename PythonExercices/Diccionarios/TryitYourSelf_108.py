@@ -43,7 +43,28 @@ lenguajes_favoritos: dict = {
 for nombre, lenguajes in lenguajes_favoritos.items():
     print('El lenguaje favorito de ' + nombre + ' es ' + lenguajes + '!')
 
+# >>
+# El lenguaje favorito de Jonathan es Python!
+# El lenguaje favorito de Karen es C++!
+# El lenguaje favorito de Arnold es JAVA!
+# El lenguaje favorito de Jenny es Pearl!
+
 # Observamos que podemos agregar nombres descriptivos a los pares Llave-Valor para que sean mas
 # descriptivos y sea más entendible nuestro codigo.
 
+print('\n[*]\n')
 
+# Recorriendo un diccionario a traves de sus Llaves.
+# El método keys() es util si solo queremos imprimir las llaves sin la necesidad de traer los valores
+# asociados a ellas. Utilicemos el mismo diccionario de los lenguajes_favoritos:
+
+for name in lenguajes_favoritos.keys():
+    print('Los nombres son: ' + name)
+
+# >>
+# Los nombres son: Jonathan
+# Los nombres son: Karen
+# Los nombres son: Arnold
+# Los nombres son: Jenny
+
+# Observamos que al utilizar el método keys() solo nos devuelve las Llaves del diccionario.
