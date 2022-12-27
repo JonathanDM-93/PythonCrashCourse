@@ -103,3 +103,28 @@ for nombres in lenguajes_favoritos.keys():
 # Arnold
 # Jenny
 # Hola Jenny veo que tu lenguaje favorito es Pearl!
+
+print('\n[*]\n')
+
+# EJEMPLO 5
+# También podemos usar el metodo keys() para buscar a una persona o Llave en este caso dentro
+# del diccionario
+
+# Creemos un diccionario para ejemplificar lo anterior. Este diccionario tiene como llave los nombres
+# y en su valor indicando que están presentes dentro del mismo.
+ingresaNombre: str = input('Ingresa el nombre que buscas: ')
+
+testDiccionario: dict = {
+    'Jonathan': 'Presente[1]',
+    'Karla': 'Presente[2]',
+    'Charles': 'Presente[3]',
+    'Magnolia': 'Presente[4]'
+}
+
+if ingresaNombre not in testDiccionario.keys():
+    print('Este nombre no esta en el diccionario')
+else:
+    print('Este nombre si esta en el diccionario ')
+
+# Lo interesante de este ejemplo es que cuando se entra en la parte del if busca en automatico
+# si la llave coincide con lo que ingreso el usuario sin la necesidad de un for.
