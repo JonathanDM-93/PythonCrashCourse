@@ -128,3 +128,31 @@ else:
 
 # Lo interesante de este ejemplo es que cuando se entra en la parte del if busca en automatico
 # si la llave coincide con lo que ingreso el usuario sin la necesidad de un for.
+
+print('\n[*]\n')
+
+# EJEMPLO 6
+# Recorriendo un Diccionario en Orden
+# Supongamos que queremos ordenar un diccionario donde los usuarios ingresaron sus nombres de forma
+# aleatoria, esto quiere decir que los devolveremos en orden alfabetico
+
+NombresAleatorios: dict = {
+    'Kevin': 11,
+    'Ana': 1,
+    'Sofia': 20,
+    'Bianca': 2,
+    'Dante': 4,
+    'Lourdes': 12,
+}
+for nombres, numero in sorted(NombresAleatorios.items()):
+    print(nombres + ' posición ' + str(numero))
+
+# >>
+# Ana posición 1
+# Bianca posición 2
+# Dante posición 4
+# Kevin posición 11
+# Lourdes posición 12
+# Sofia posición 20
+
+# Vemos que imprime en orden los nombres.
