@@ -68,3 +68,38 @@ for name in lenguajes_favoritos.keys():
 # Los nombres son: Jenny
 
 # Observamos que al utilizar el método keys() solo nos devuelve las Llaves del diccionario.
+
+print('\n[*]\n')
+
+# EJEMPLO 4
+# Hagamos otro ejemplo utilizando el mismo diccionario de:
+lenguajes_favoritos: dict = {
+     'Jonathan': 'Python',
+     'Karen': 'C++',
+     'Arnold': 'JAVA',
+     'Jenny': 'Pearl',
+ }
+
+# Creemos una lista:
+ListaNombres: list = ['Jonathan', 'Jenny']
+for nombres in lenguajes_favoritos.keys():
+    print(nombres)
+
+    if nombres in ListaNombres:
+        print('Hola ' + nombres + ' veo que tu lenguaje favorito es ' + lenguajes_favoritos[nombres] + '!')
+
+# Lo que sucede en este ejemplo es:
+# 1.- Se creo un diccionario.
+# 2.- Se creo una lista con algunos nombres que también se encuentran dentro del diccionario.
+# 3.- En el for se recorrera el diccionario a traves de sus LAVES y se imprimirán los nombres
+# 4.- Vemos que el if esta identado al nivel del for, entonces se recorrera también la lista
+# ListaNombres, por lo que si dentro de esta lista se encuentra una coincidencia con las LLAVES
+# del diccionario se imprime un mensaje específico dentro del if.
+
+# >>
+# Jonathan
+# Hola Jonathan veo que tu lenguaje favorito es Python!
+# Karen
+# Arnold
+# Jenny
+# Hola Jenny veo que tu lenguaje favorito es Pearl!
