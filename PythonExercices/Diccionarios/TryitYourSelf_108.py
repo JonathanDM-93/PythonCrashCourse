@@ -18,7 +18,8 @@ for key, value in UsuarioPrimario.items():
     print('LLave: ' + key)
     print('Valor: ' + value)
 
-# >> LLave: Nombre
+# >>
+# LLave: Nombre
 # Valor: Jonathan
 # LLave: Apellido
 # Valor: Lopez
@@ -27,4 +28,22 @@ for key, value in UsuarioPrimario.items():
 
 # Vemos que se imprime el diccionario. Agregamos el método items() después del nombre del
 # diccionario para que no retorne los pares Llave-Valor.
+
+print('\n[*]\n')
+
+# Veamos otro ejemplo de recorrer diccionarios:
+
+lenguajes_favoritos: dict = {
+    'Jonathan': 'Python',
+    'Karen': 'C++',
+    'Arnold': 'JAVA',
+    'Jenny': 'Pearl',
+}
+
+for nombre, lenguajes in lenguajes_favoritos.items():
+    print('El lenguaje favorito de ' + nombre + ' es ' + lenguajes + '!')
+
+# Observamos que podemos agregar nombres descriptivos a los pares Llave-Valor para que sean mas
+# descriptivos y sea más entendible nuestro codigo.
+
 
