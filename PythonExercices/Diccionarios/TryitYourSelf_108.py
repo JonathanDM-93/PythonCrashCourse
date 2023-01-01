@@ -156,3 +156,20 @@ for nombres, numero in sorted(NombresAleatorios.items()):
 # Sofia posición 20
 
 # Vemos que imprime en orden los nombres.
+
+print('\n[*]\n')
+
+# EJEMPLO 7
+# Recorriendo un diccionario a traves de sus valores
+# Si en este caso ahora estamos enfocados en los valores del diccionario, podemos acceder
+# a ellos a traves del método values().
+# Creemos un diccionario con los costos ficticios de algunos celulares:
+
+CelPrecio: dict = {
+    'Iphone': 18000,
+    'Samsung': 12500,
+    'Xiaomi': 7950,
+    'Nokia': 7699,
+}
+for precio in CelPrecio.values():
+    print('El precio de los equipos son: ' + str(precio))
