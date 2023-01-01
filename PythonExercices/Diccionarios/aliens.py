@@ -40,7 +40,7 @@ print('\n[*]\n')
 # Creemos una serie de aliens con las siguientes líneas:
 
 # Crear una lista vacía:
-aliens: list = []
+ListAliens: list = []
 
 for numero_alien in range(30):
     nuevo_alien: dict = {
@@ -48,15 +48,22 @@ for numero_alien in range(30):
         'puntos': 5,
         'velocidad': 'baja',
     }
-    aliens.append(nuevo_alien)
+    ListAliens.append(nuevo_alien)
+
+# Queremos ahora cambiar el color de los tres primeros aliens, a traves de un for:
+for color_alien in ListAliens[0:3]:
+    if color_alien['color'] == 'verde':  # Si la clave del color del alien es verde cambiara
+        color_alien['color'] = 'amarillo'
+        color_alien['velocidad'] = 'intermedio'
+        color_alien['puntos'] = '10'
 
 # Imprime los primeros 5 elementos
-for five_elements in aliens[0:5]:
+for five_elements in ListAliens[0:5]:
     print(five_elements)
 print('...')
 
 # Mostrar cuentos aliens hemos creado:
-print('Número total de aliens: ' + str(len(aliens)))
+print('Número total de aliens: ' + str(len(ListAliens)))
 
 # >>
 # Número total de aliens: 30
