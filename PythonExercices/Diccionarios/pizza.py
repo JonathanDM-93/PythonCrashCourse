@@ -20,4 +20,9 @@ print('La pizza que ordenaste tiene la corteza: ' + pizza['corteza'] + ' con las
 for item in pizza['cobertura']:
     print(item)
 
+# >>
+# La pizza que ordenaste tiene la corteza: delgada con las siguientes coberturas:
+# Champiñones
+# Piña
+
 
