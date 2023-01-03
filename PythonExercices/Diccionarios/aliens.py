@@ -42,13 +42,13 @@ print('\n[*]\n')
 # Crear una lista vacía:
 ListAliens: list = []
 
-for numero_alien in range(30):
-    nuevo_alien: dict = {
+for add_alien in range(30):
+    green_alien: dict = {
         'color': 'verde',
         'puntos': 5,
         'velocidad': 'baja',
     }
-    ListAliens.append(nuevo_alien)
+    ListAliens.append(green_alien)
 
 # Queremos ahora cambiar el color de los tres primeros aliens, a traves de un for:
 for color_alien in ListAliens[0:3]:
@@ -56,6 +56,11 @@ for color_alien in ListAliens[0:3]:
         color_alien['color'] = 'amarillo'
         color_alien['velocidad'] = 'intermedio'
         color_alien['puntos'] = '10'
+    elif color_alien['color'] == 'amarillo':  # Agregamos un bloque elif que cambia los alies a color rojo
+        color_alien['color'] = 'rojo'
+        color_alien['velocidad'] = 'alta'
+        color_alien['puntos'] = '15'
+
 
 # Imprime los primeros 5 elementos
 for five_elements in ListAliens[0:5]:
