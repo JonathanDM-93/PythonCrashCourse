@@ -36,5 +36,28 @@ for person in people:
 # {'first_name': 'Kevin', 'last_name': 'White', 'age': 48, 'city': 'México'}
 # {'first_name': 'Magnolia', 'last_name': 'Williams', 'age': 27, 'city': 'Atlanta'}
 
+print('\n[*]\n')
 
-# EJE# EJERCICIO 6-8 Pets
+# EJERCICIO 6-8 Pets
+# 1.- Crear varios diccionarios, donde el nombre de cada diccionario es el nombre de una mascota
+# 2.- En cada diccionario incluye el tipo de animal y el nombre del dueño.
+# 3.- Recorre la lista de los diccionarios a traves de un loop e imprime todo sobre la mascota.
+
+Draks: dict = {
+    'Tipo': 'Perro',
+    'Raza': 'Husky',
+    'Dueño': 'Edwin',
+}
+
+Luke: dict = {
+    'Tipo': 'Perro',
+    'Raza': 'Pastor Inglés',
+    'Dueño': 'Miguel',
+}
+
+namePets: list = [Draks, Luke]
+for name in namePets:
+    print(name)
+
+# EJEMPLO 6-9 Favorite Places
+
