@@ -1,4 +1,5 @@
 # Hacer los ejercicios del TRY IT YOURSELF PAG 114.
+import random
 
 # EJERCICIO 6-7 People
 # Hacer tres diccionarios con información sobre ellos y guardar los diccionarios en una lista,
@@ -81,5 +82,22 @@ for places, names in favorite_places.items():
 # Enrique ama visitar Acapulco
 # Kevin ama visitar Teotihuacan
 
+print('\n[*]\n')
+
 # EJEMPLO 6-10 Favorite numbers
+# 1.- Asigna a varias personas como Llaves
+# Y agrega algunos de sus numeros favoritos como sus Valores
+# Imprime los nombres y sus numeros favoritos a traves de un loop
+
+favorite_num: dict = {
+    'Wilson': [7, 36, 200],
+    'Lilia': [1, 48, 789],
+}
+
+for name, numeros in favorite_num.items():
+    print('Los números favoritos de ' + name + ' son: ' + str(numeros))
+
+# >>
+# Los números favoritos de Wilson son: [7, 36, 200]
+# Los números favoritos de Lilia son: [1, 48, 789]
 
