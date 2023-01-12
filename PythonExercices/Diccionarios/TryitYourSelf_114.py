@@ -95,7 +95,9 @@ favorite_num: dict = {
 }
 
 for name, numeros in favorite_num.items():
-    print('Los números favoritos de ' + name + ' son: ' + str(numeros))
+    print('Los números favoritos de ' + name + ' son: ')
+    for num in numeros: # Recorre cada número individualmente
+        print('\t' + str(num))
 
 # >>
 # Los números favoritos de Wilson son: [7, 36, 200]
