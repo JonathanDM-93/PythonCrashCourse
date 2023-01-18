@@ -9,9 +9,9 @@ prompt += '\nDime algo y te lo repetire: '
 activeFlag: bool = True
 message: str = ""
 while activeFlag:  # Mientras la condición es TRUE
-    message = input(prompt)
+    message = input(prompt) # La variable message recibirá lo que el usuario ingreso
 
-    if message == 'quit': # Si la palabra es quit la bandera ahora será FALSA y se termina el programa
+    if message == 'quit': # Si la palabra es 'quit' la bandera ahora será FALSA y se termina el programa
         activeFlag: bool = False
     else:
-        print(message) # Si la active sigue siendo TRUE se imprime el mensaje.
+        print(message) # Si la activeFlag sigue siendo TRUE se imprime el mensaje.
