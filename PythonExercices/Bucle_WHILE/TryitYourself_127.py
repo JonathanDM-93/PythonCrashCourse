@@ -1,4 +1,6 @@
-# EJERCICIO 7-4
+# EJERCICIO 7-4 Hacer un programa donde el usuario ingrese sus ingredientes favoritos
+# y se termine al ingresar quit.
+
 pizzaIngredients: str = '\nAgrega los ingredientes que quieres en tu pizza: '
 pizzaIngredients += '\nIngresa quit para finalizar tu orden. '
 
@@ -6,6 +8,7 @@ activeFlag: bool = True
 ingredients: str = ""
 while activeFlag:
     ingredients = input(pizzaIngredients)
+
     if ingredients == 'quit':
         activeFlag: bool = False
     else:
