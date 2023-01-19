@@ -18,7 +18,7 @@ while activeFlag:
 # EJERCICIO 7-5 Movie tickets
 # Modifica el programa para que se termine el loop
 
-AgeInstructions: str = "\nPresiona 'q' para salir."
+AgeInstructions: str = "\nPresiona 999 para salir."
 AgeInstructions += '\n¿Cual es tu edad: '
 
 AsientosDisponibles: int = 5 # Variable que indica cuantos asientos están disponibles.
@@ -29,7 +29,11 @@ while AsientosDisponibles != 0:
     AgeMessage = int(input(AgeInstructions)) # Se hizo un cast para convertir de str a int.
     AsientosDisponibles -= 1 # Se va reduciendo en 1 cada vez que se ocupe in asiento
 
-    if AgeMessage <= 3:
+    if AgeMessage == 999: # También si queremos que el programa se termine antes usamos break
+        print('Hasta la vista baby!')
+        break
+
+    elif AgeMessage <= 3:
         print('Tu entrada es gratis.')
 
     elif AgeMessage > 3 | AgeMessage < 12:
