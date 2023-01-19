@@ -16,15 +16,28 @@ while activeFlag:
 
 
 # EJERCICIO 7-5 Movie tickets
+# Modifica el programa para que se termine el loop
 
-AgeUser: int = int(input('¿Cual es tu edad?: '))
+AgeInstructions: str = "\nPresiona 'q' para salir."
+AgeInstructions += '\n¿Cual es tu edad: '
 
-if AgeUser < 3:
-    print('Tu entrada es gratis.')
-elif AgeUser > 3 | AgeUser < 12:
-    print('Tu entrada cuesta $ 10.00')
-elif AgeUser > 12:
-    print('Tu entrada cuesta $ 15.00')
+AsientosDisponibles: int = 5 # Variable que indica cuantos asientos están disponibles.
+AgeMessage: str = "" # Mensaje vació que debe estar antes de comenzar el While.
+
+#Crear el While con la condición que se terminara cuando el conteo sea igual a 0
+while AsientosDisponibles != 0:
+    AgeMessage = int(input(AgeInstructions)) # Se hizo un cast para convertir de str a int.
+    AsientosDisponibles -= 1 # Se va reduciendo en 1 cada vez que se ocupe in asiento
+
+    if AgeMessage <= 3:
+        print('Tu entrada es gratis.')
+
+    elif AgeMessage > 3 | AgeMessage < 12:
+        print('Tu entrada cuesta $ 10.00')
+
+    elif AgeMessage >= 12:
+        print('Tu entrada cuesta $ 15.00')
+
 
 
 
