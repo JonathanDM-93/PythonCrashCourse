@@ -11,8 +11,8 @@ secret_manager_response = secretsmanager_client.get_secret_value(
     VersionId='string',
     VersionStage='string'
 )
-username = "Mundo"
-password = "alondra"
+username = "jrosam"
+password = "PASWORD##########"
 url = "jdbc:redshift://redshifthost:5439/database?user=" + str(username) + "&password=" + str(password)
 
 # Read data from a table
