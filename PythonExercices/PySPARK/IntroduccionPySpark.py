@@ -9,7 +9,7 @@ spark =SparkSession.builder.appName('IntroduccionPySpark').getOrCreate()
 
 
 # cargar el archivo .csv el cual ya es un DF
-df = spark.read.load("C:/Users/joni_/Downloads/peliculas.csv",
+df = spark.read.cvs("C:/Users/joni_/Downloads/peliculas.csv",
                      format="csv", sep=",",
                      inferSchema="true",
                      header="true")
