@@ -95,8 +95,8 @@ ReadDF = ReadDF.select(*select_columnas)
 from pyspark.sql.functions import *
 
 Missing_Values: int = ReadDF.filter((ReadDF['popularity']=='')|ReadDF['popularity'].isNull()|isnan(ReadDF['popularity'])).count()
-print('\t' + str(Missing_Values))
-
+# print("Valores faltantes: " + str(Missing_Values))
+# Valores faltantes: 1059
 
 
 
