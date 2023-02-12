@@ -109,7 +109,70 @@ CommandMissingValues = ReadDF.select([count(when((col(c)=='') | col(c).isNull() 
 # +---+------+----------+------------+-------+-----+
 
 
+"""Calcular Frecuencias"""
+# Calculemos las frecuencias de variables categorical
+# Glosario: Las variables categoricas son variables tipo STRING que existen en un DATASET
+# Primero verifiquemos si hay algún título repetido en el DATASET:
 
+TitulosRepetidos = ReadDF.groupby(ReadDF['title']).count()
+# ---> TitulosRepetidos.show()
 
+QUERYTWO = spark.sql("""
+SELECT title, COUNT(title)
+FROM View
+GROUP BY title
+""")
+# ---> QUERYTWO.show()
 
+# ¡¡Ambos comando devuelven lo mismo. Uno es con comandos nativos de PySpark y el segundo con comandos de SQL!!
+
+# +--------------------+-----+
+# |               title|count|
+# +--------------------+-----+
+# |   The Corn Is Green|    2|
+# |Meet The Browns -...|    1|
+# |Morenita, El Esca...|    1|
+# | Father Takes a Wife|    1|
+# |    Taking The Curve|    1|
+# |           Fleshburn|    1|
+# |          Dead Lenny|    1|
+# |El juego de la silla|    1|
+# |              Sargad|    1|
+# |                 Kin|    3|
+# |I Don't Feel at H...|    1|
+# |Penguins of Madag...|    1|
+# | Ormayundo Ee Mukham|    1|
+# |         Eat With Me|    1|
+# |  Ainda Há Pastores?|    1|
+# |The Werewolf of W...|    1|
+# |    Conquering China|    1|
+# |Discovering the R...|    1|
+# |My Wife Is a Gang...|    1|
+# |Depeche Mode: Tou...|    1|
+# +--------------------+-----+
+# only showing top 20 rows
+# Figura 2-6 Output of one_way frequency
+
+# El comando anterior devuelve el número de veces que aparece un título en el DATASET
+# A menudo tu queras observar los datos ordenados
+
+TitulosRepetidosOrdenados = ReadDF.groupby(ReadDF['title']).count().sort(desc('count'))
+# ---> TitulosRepetidosOrdenados.show(10,False)
+
+# +--------------------+-----+
+# |title               |count|
+# +--------------------+-----+
+# |null                |1455 |
+# |Mother              |14   |
+# |The Intruder        |13   |
+# |Macbeth             |13   |
+# |Treasure Island     |13   |
+# |The Three Musketeers|12   |
+# |Cinderella          |12   |
+# |Alone               |12   |
+# |Desire              |12   |
+# |First Love          |12   |
+# +--------------------+-----+
+# only showing top 10 rows
+# Figura 2-7 Output of one_way frequency sorted
 
