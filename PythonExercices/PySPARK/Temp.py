@@ -22,8 +22,8 @@ url = "jdbc:redshift://redshifthost:5439/database?user=" + str(username) + "&pas
 df = sqlContext.read \
     .format("io.github.spark_redshift_community.spark.redshift") \
     .option("url", "jdbc:redshift://mycluster.cfvkjcuj27ud.us-east-1.redshift.amazonaws.com:5439/dev") \
-    .option("dev", "sales") \
-    .option("tempdir", "s3a://jonathancubeta/tickitdb") \
+    .option("dbtable", "dev.sales") \
+    .option("tempdir", "s3://jonathancubeta/tickitdb") \
     .load()
 
 df.show()
