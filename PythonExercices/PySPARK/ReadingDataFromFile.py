@@ -176,3 +176,40 @@ TitulosRepetidosOrdenados = ReadDF.groupby(ReadDF['title']).count().sort(desc('c
 # only showing top 10 rows
 # Figura 2-7 Output of one_way frequency sorted
 
+"""Ordenamiento y filtrado 'Un camino de Frecuencias'"""
+# Primero filtremos los valores que no son NULL. Nosotros usaremos el sifgi !=
+# para crear un DATASET temporal, el cual está hecho intensionalmente para demostrar
+# el uso de la condición NOT.
+
+# Subconjunto y Creando un DATAFRAME TEMPORAL para eliminar cualquier valor faltante
+ReadDF_Temp = ReadDF.filter((ReadDF['title']!='') & (ReadDF['title'].isNotNull()) & (~isnan(ReadDF['title'])))
+
+# Subconjunto el DATAFRAME a títulos que están repetidos más de cuatro veces.
+Filtro_uno = ReadDF_Temp.groupby(ReadDF_Temp['title']).count().filter("`count` >4").sort(col("count").desc())
+# ---> Filtro_uno.show(10, False)
+
+# +--------------------+-----+
+# |title               |count|
+# +--------------------+-----+
+# |Mother              |14   |
+# |The Intruder        |13   |
+# |Macbeth             |13   |
+# |Treasure Island     |13   |
+# |First Love          |12   |
+# |Alone               |12   |
+# |Desire              |12   |
+# |Cinderella          |12   |
+# |The Three Musketeers|12   |
+# |Love                |11   |
+# +--------------------+-----+
+# only showing top 10 rows
+# Figure 2-8 Output of filtered and sorted version of one-way frequency
+
+# El siguiente comando es para encontrar el número de títulos que están repetidos cuatro veces o más.
+Filtro_dos = ReadDF_Temp.groupby(ReadDF_Temp['title']).count().filter("`count` >=4").sort(col("count").desc()).count()
+# ---> print ("Output: \n" + str(Filtro_dos))
+
+# El siguiente comando es para eliminar el DATAFRAME TEMPORAL que se creo en el proceso.
+
+del ReadDF_Temp
+
