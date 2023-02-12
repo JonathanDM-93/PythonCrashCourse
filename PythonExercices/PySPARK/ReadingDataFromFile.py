@@ -94,12 +94,19 @@ ReadDF = ReadDF.select(*select_columnas)
 # usando funciones de construcción en PySpark
 from pyspark.sql.functions import *
 
-Missing_Values: int = ReadDF.filter((ReadDF['popularity']=='')|ReadDF['popularity'].isNull()|isnan(ReadDF['popularity'])).count()
+Missing_Values = ReadDF.filter((ReadDF['popularity']=='') | ReadDF['popularity'].isNull() | isnan(ReadDF['popularity'])).count()
 # print("Valores faltantes: " + str(Missing_Values))
 # Valores faltantes: 1059
 
-
-
+# Si necesitas calcular todos los valores faltantes en el  DATAFRAME puedes usar el sig. Comando
+CommandMissingValues = ReadDF.select([count(when((col(c)=='') | col(c).isNull() | isnan(c), c)).
+                                 alias(c) for c in ReadDF.columns])
+# ---> CommandMissingValues.show()
+# +---+------+----------+------------+-------+-----+
+# | id|budget|popularity|release_date|revenue|title|
+# +---+------+----------+------------+-------+-----+
+# |658|   658|      1059|        1487|   1059| 1455|
+# +---+------+----------+------------+-------+-----+
 
 
 
