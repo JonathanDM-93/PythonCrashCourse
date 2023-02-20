@@ -273,6 +273,38 @@ for column in date_vars:
 # only showing top 10 rows
 # Figure 2-12 Glimpse of data after changing the datatype
 
+"""Estadística Descriptiva"""
+# Para analizar cualquier tipo de data, deberíamos estar interesados en cualquier
+# tipo de información como su distribución y dispersión.
+# Spark tiene a un repositorio de funciones que pueden hacerte calcular fácilmente estos campos.
+# La función describe en Spark es muy útil nos puede proporcionar la cuenta de los totales de valores
+# no faltantes por cada columna, mediana, promedio, desviación estandar y valores minimos y maximos.
+
+
+# -> ReadDF.describe().show()
+# +-------+------------------+--------------------+------------------+--------------------+--------------------+
+# |summary|                id|              budget|        popularity|             revenue|               title|
+# +-------+------------------+--------------------+------------------+--------------------+--------------------+
+# |  count|            119469|              119073|            118671|              118671|              118672|
+# |   mean|236930.37953778805|    1935164.88358402| 4.542358538121745|  5177548.7368185995|            Infinity|
+# | stddev| 883010.9925616537|1.1924348980601171E7|15.544944047515473|4.5767315120673515E7|                 NaN|
+# |    min|                 0|                 0.0|               0.6|                 0.0|!Women Art Revolu...|
+# |    max|         215880014|               3.8E8|          2068.491|        2.79780045E9|   ＡLife That Sings|
+# +-------+------------------+--------------------+------------------+--------------------+--------------------+
+
+
+# Valores desconocidos en la columna de budget estas marcadas en 0, filtremos fuera estos valores
+# antes de calcular la mediana.
+
+ReadDF_Temp = ReadDF.filter((ReadDF['budget'] != 0) & (ReadDF['budget'].isNotNull()) &
+                    (~isnan(ReadDF['budget'])))
+
+# El segundo parametro indica el valor medio, el cual es 0.5 tu puedes tratar de ajustar
+# el valor para calcular otros percentiles.
+
+median = ReadDF.approxQuantile('budget',[0.5],0.1)
+# -> print ('El valor medio de budget es: ' + str (median))
+
 
 
 
