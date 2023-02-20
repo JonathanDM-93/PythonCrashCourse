@@ -3,6 +3,9 @@ from pyspark.sql import SparkSession
 # Crear sesión
 spark = SparkSession.builder.appName("Data_Wrangling").getOrCreate()
 
+# Importar librerias necesarias para el Cast
+from pyspark.sql.types import *
+
 # Cargar el archivo
 ReadDF = spark.read.load("C:/Users/joni_/Downloads/movie_data_tmbd.csv",
                          format="csv", sep="|",
@@ -212,4 +215,79 @@ Filtro_dos = ReadDF_Temp.groupby(ReadDF_Temp['title']).count().filter("`count` >
 # El siguiente comando es para eliminar el DATAFRAME TEMPORAL que se creo en el proceso.
 
 del ReadDF_Temp
+
+"""Casting de variables 20-02-2023"""
+# Algunas operaciones pueden tener resultados incorrectos si los tipos de datos
+# no están correctamente identificados. Es altamente recomendable identificar de primera mano
+# el tipo de dato para cualquiera de nuestros analísis. Ahora veremos como hacer un cast de algunas variables
+# para tener los tipos correctos en nuestra DATA.
+
+#Antes de casting
+# ---> print(ReadDF.dtypes)
+# [('id', 'int'), ('budget', 'string'), ('popularity', 'string'), ('release_date', 'string'), ('revenue', 'string'), ('title', 'string')]
+# Con el comando de dtypes podemos ver el tipo de dato que esta asociado a la columna y claramente algunos están equivocados particularmente la fecha
+
+
+# Despues del Casting
+ReadDF = ReadDF.withColumn('budget',ReadDF['budget'].cast('float'))
+# ---> print(ReadDF.dtypes)
+# [('id', 'int'), ('budget', 'float'), ('popularity', 'string'), ('release_date', 'string'), ('revenue', 'string'), ('title', 'string')]
+# Figure 2.6 Datatypes after casting
+# Vemos que la columna 'budget' cambio a tipo float
+# Observamos que usamos la función cast. También deberás haber notado que usamos una función adicional
+# llamada .withColumn que es muy conocida en Pyspark. Es utilizada para actualizar los valores
+# renombrar y convertir datatypes y para crear nuevas columnas.
+
+# Identificar y asignar la lista de variables
+int_vars: list = ['id']
+float_vars: list = ['budget', 'popularity', 'revenue']
+date_vars:list = ['release_date']
+
+# Convirtiendo las variables
+for column in int_vars:
+    ReadDF=ReadDF.withColumn(column,ReadDF[column].cast(IntegerType()))
+for column in float_vars:
+    ReadDF=ReadDF.withColumn(column,ReadDF[column].cast(FloatType()))
+for column in date_vars:
+    ReadDF=ReadDF.withColumn(column,ReadDF[column].cast(DateType()))
+
+# -> print(ReadDF.dtypes)
+# [('id', 'int'), ('budget', 'float'), ('popularity', 'float'), ('release_date', 'date'), ('revenue', 'float'), ('title', 'string')]
+# Se cambiaron correctamente los tipos de datos en el DATAFRAME
+
+# -> ReadDF.show(10,False)
+# +-----+--------+----------+------------+-------+---------------------------------------+
+# |id   |budget  |popularity|release_date|revenue|title                                  |
+# +-----+--------+----------+------------+-------+---------------------------------------+
+# |43000|0.0     |3.892     |1962-05-23  |0.0    |The Elusive Corporal                   |
+# |43001|0.0     |5.482     |1962-11-12  |0.0    |Sundays and Cybele                     |
+# |43002|0.0     |8.262     |1962-05-24  |0.0    |Lonely Are the Brave                   |
+# |43003|0.0     |7.83      |1975-03-12  |0.0    |F for Fake                             |
+# |43004|500000.0|5.694     |1962-10-09  |0.0    |Long Day's Journey Into Night          |
+# |43006|0.0     |2.873     |1962-03-09  |0.0    |My Geisha                              |
+# |43007|0.0     |3.433     |1962-10-31  |0.0    |Period of Adjustment                   |
+# |43008|0.0     |7.869     |1959-03-13  |0.0    |The Hanging Tree                       |
+# |43010|0.0     |3.775     |1962-01-01  |0.0    |Sherlock Holmes and the Deadly Necklace|
+# |43011|0.0     |7.185     |1962-01-01  |0.0    |Sodom and Gomorrah                     |
+# +-----+--------+----------+------------+-------+---------------------------------------+
+# only showing top 10 rows
+# Figure 2-12 Glimpse of data after changing the datatype
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
