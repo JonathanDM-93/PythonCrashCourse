@@ -306,8 +306,33 @@ median = ReadDF.approxQuantile('budget',[0.5],0.1)
 # -> print ('El valor medio de budget es: ' + str (median))
 
 
+"""Unicos/Valores Diferentes Y Conteos"""
+
+# Tú en ciertas ocasiones queras solo saber el número de niveles o cardinalidad con una variable
+# Para hacer esto podemos usar la función countDistinct disponible en Spark
+
+# Cuenta los valores diferentes para los titulo
+Contador = ReadDF.agg(countDistinct(col('title')).alias('count'))
+# -> Contador.show()
+# +------+
+# | count|
+# +------+
+# |107973|
+# +------+
+#Figure 2-14 Distinct titles count output
 
 
+Consulta = spark.sql("""
+SELECT 
+COUNT(DISTINCT(title)) AS count
+FROM View
+""")
+# -> Consulta.show()
+# +---------------------+
+# |count(DISTINCT title)|
+# +---------------------+
+# |               107973|
+# +---------------------+
 
 
 
