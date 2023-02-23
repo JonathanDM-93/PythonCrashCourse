@@ -311,6 +311,7 @@ median = ReadDF.approxQuantile('budget',[0.5],0.1)
 # Tú en ciertas ocasiones queras solo saber el número de niveles o cardinalidad con una variable
 # Para hacer esto podemos usar la función countDistinct disponible en Spark
 
+
 # Cuenta los valores diferentes para los titulo
 Contador = ReadDF.agg(countDistinct(col('title')).alias('count'))
 # -> Contador.show()
@@ -319,8 +320,8 @@ Contador = ReadDF.agg(countDistinct(col('title')).alias('count'))
 # +------+
 # |107973|
 # +------+
-#Figure 2-14 Distinct titles count output
-
+# Figure 2-14 Distinct titles count output
+# Algo interesante de la anterior consulta es que utiliza la método Aggregate on the entire DataFrame without groups (shorthand for df.groupBy().agg()).
 
 Consulta = spark.sql("""
 SELECT 
@@ -335,11 +336,164 @@ FROM View
 # +---------------------+
 
 
+# Contar cuantas diferentes ocurrencias de títulos existen SPARK-SQL
+TitulosDiff = ReadDF.select('title').distinct()
+# --> TitulosDiff.show(10,False)
 
+# +--------------------------+
+# |title                     |
+# +--------------------------+
+# |The Corn Is Green         |
+# |Meet The Browns - The Play|
+# |Morenita, El Escandalo    |
+# |Father Takes a Wife       |
+# |Taking The Curve          |
+# |Fleshburn                 |
+# |Dead Lenny                |
+# |El juego de la silla      |
+# |Sargad                    |
+# |Kin                       |
+# +--------------------------+
+# only showing top 10 rows
+# Figure. 2-15 Distinct titles output
 
+# Ahora con SQL
+Consulta_TITULOS = spark.sql ("""
+SELECT DISTINCT(title)
+FROM View
+""")
+# --> Consulta_TITULOS.show(10,False)
 
+# Extrae el año por fecha de lanzamiento
+# Haremos un DF temporal para esto
 
+DFTEMP_YearRelease = ReadDF.withColumn('release_year', year('release_date'))
+# --> DFTEMP_YearRelease.show(10,False)
 
+# +-----+--------+----------+------------+-------+---------------------------------------+------------+
+# |id   |budget  |popularity|release_date|revenue|title                                  |release_year|
+# +-----+--------+----------+------------+-------+---------------------------------------+------------+
+# |43000|0.0     |3.892     |1962-05-23  |0.0    |The Elusive Corporal                   |1962        |
+# |43001|0.0     |5.482     |1962-11-12  |0.0    |Sundays and Cybele                     |1962        |
+# |43002|0.0     |8.262     |1962-05-24  |0.0    |Lonely Are the Brave                   |1962        |
+# |43003|0.0     |7.83      |1975-03-12  |0.0    |F for Fake                             |1975        |
+# |43004|500000.0|5.694     |1962-10-09  |0.0    |Long Day's Journey Into Night          |1962        |
+# |43006|0.0     |2.873     |1962-03-09  |0.0    |My Geisha                              |1962        |
+# |43007|0.0     |3.433     |1962-10-31  |0.0    |Period of Adjustment                   |1962        |
+# |43008|0.0     |7.869     |1959-03-13  |0.0    |The Hanging Tree                       |1959        |
+# |43010|0.0     |3.775     |1962-01-01  |0.0    |Sherlock Holmes and the Deadly Necklace|1962        |
+# |43011|0.0     |7.185     |1962-01-01  |0.0    |Sodom and Gomorrah                     |1962        |
+# +-----+--------+----------+------------+-------+---------------------------------------+------------+
+# only showing top 10 rows
+# Extraer el año de la columna release_date y guardarla en una nueva columna y esto almacenarlo un un DF Temporal
+
+# CONSULTA EN SQL COMÚN
+TEMP_YearRelease_SQL = spark.sql("""
+SELECT id, budget,popularity, release_date, revenue, title, YEAR(release_date) AS release_year
+FROM View
+""")
+# --> TEMP_YearRelease_SQL.show(10,False)
+
+# Como vemos tenemos el mismo resultado con un Query en SQL
+# +-----+------+----------+------------+-------+---------------------------------------+------------+
+# |id   |budget|popularity|release_date|revenue|title                                  |release_year|
+# +-----+------+----------+------------+-------+---------------------------------------+------------+
+# |43000|0     |3.892     |1962-05-23  |0      |The Elusive Corporal                   |1962        |
+# |43001|0     |5.482     |1962-11-12  |0      |Sundays and Cybele                     |1962        |
+# |43002|0     |8.262     |1962-05-24  |0      |Lonely Are the Brave                   |1962        |
+# |43003|0     |7.83      |1975-03-12  |0      |F for Fake                             |1975        |
+# |43004|500000|5.694     |1962-10-09  |0      |Long Day's Journey Into Night          |1962        |
+# |43006|0     |2.873     |1962-03-09  |0      |My Geisha                              |1962        |
+# |43007|0     |3.433     |1962-10-31  |0      |Period of Adjustment                   |1962        |
+# |43008|0     |7.869     |1959-03-13  |0      |The Hanging Tree                       |1959        |
+# |43010|0     |3.775     |1962-01-01  |0      |Sherlock Holmes and the Deadly Necklace|1962        |
+# |43011|0     |7.185     |1962-01-01  |0      |Sodom and Gomorrah                     |1962        |
+# +-----+------+----------+------------+-------+---------------------------------------+------------+
+# only showing top 10 rows
+
+# Ahora extraigamos el MES, que es muy similar al año
+DFTEMP_MonthRelease = ReadDF.withColumn('release_month',month('release_date'))
+# -> DFTEMP_MonthRelease.show(10,False)
+
+# +-----+--------+----------+------------+-------+---------------------------------------+-------------+
+# |id   |budget  |popularity|release_date|revenue|title                                  |release_month|
+# +-----+--------+----------+------------+-------+---------------------------------------+-------------+
+# |43000|0.0     |3.892     |1962-05-23  |0.0    |The Elusive Corporal                   |5            |
+# |43001|0.0     |5.482     |1962-11-12  |0.0    |Sundays and Cybele                     |11           |
+# |43002|0.0     |8.262     |1962-05-24  |0.0    |Lonely Are the Brave                   |5            |
+# |43003|0.0     |7.83      |1975-03-12  |0.0    |F for Fake                             |3            |
+# |43004|500000.0|5.694     |1962-10-09  |0.0    |Long Day's Journey Into Night          |10           |
+# |43006|0.0     |2.873     |1962-03-09  |0.0    |My Geisha                              |3            |
+# |43007|0.0     |3.433     |1962-10-31  |0.0    |Period of Adjustment                   |10           |
+# |43008|0.0     |7.869     |1959-03-13  |0.0    |The Hanging Tree                       |3            |
+# |43010|0.0     |3.775     |1962-01-01  |0.0    |Sherlock Holmes and the Deadly Necklace|1            |
+# |43011|0.0     |7.185     |1962-01-01  |0.0    |Sodom and Gomorrah                     |1            |
+# +-----+--------+----------+------------+-------+---------------------------------------+-------------+
+# only showing top 10 rows
+
+# Ahora extraigamos el MES, que es muy similar al año
+DFTEMP_DayRelease = ReadDF.withColumn('release_day', dayofmonth('release_date'))
+# --> DFTEMP_DayRelease.show(10,False)
+# +-----+--------+----------+------------+-------+---------------------------------------+-----------+
+# |id   |budget  |popularity|release_date|revenue|title                                  |release_day|
+# +-----+--------+----------+------------+-------+---------------------------------------+-----------+
+# |43000|0.0     |3.892     |1962-05-23  |0.0    |The Elusive Corporal                   |23         |
+# |43001|0.0     |5.482     |1962-11-12  |0.0    |Sundays and Cybele                     |12         |
+# |43002|0.0     |8.262     |1962-05-24  |0.0    |Lonely Are the Brave                   |24         |
+# |43003|0.0     |7.83      |1975-03-12  |0.0    |F for Fake                             |12         |
+# |43004|500000.0|5.694     |1962-10-09  |0.0    |Long Day's Journey Into Night          |9          |
+# |43006|0.0     |2.873     |1962-03-09  |0.0    |My Geisha                              |9          |
+# |43007|0.0     |3.433     |1962-10-31  |0.0    |Period of Adjustment                   |31         |
+# |43008|0.0     |7.869     |1959-03-13  |0.0    |The Hanging Tree                       |13         |
+# |43010|0.0     |3.775     |1962-01-01  |0.0    |Sherlock Holmes and the Deadly Necklace|1          |
+# |43011|0.0     |7.185     |1962-01-01  |0.0    |Sodom and Gomorrah                     |1          |
+# +-----+--------+----------+------------+-------+---------------------------------------+-----------+
+# only showing top 10 rows
+
+# Calculando cuantos diferentes titulos hay por año
+# Se tiene que usar el DATAFRAME temporal donde se extrajo el año en una nueva columna y despues se toma es columna para agrupar
+DistinctTitles = DFTEMP_YearRelease.groupBy('release_year').agg(countDistinct('title'))
+# --> DistinctTitles.show(10,False)
+# +------------+------------+
+# |release_year|count(title)|
+# +------------+------------+
+# |1959        |582         |
+# |1990        |1027        |
+# |1975        |797         |
+# |1977        |892         |
+# |1924        |53          |
+# |2003        |1873        |
+# |2007        |2763        |
+# |2018        |5523        |
+# |1974        |942         |
+# |2015        |4415        |
+# +------------+------------+
+# only showing top 10 rows
+# Figure 2-16 Distinct titles count by year
+
+DFTEMP_YearRelease.createOrReplaceTempView("Temporal")
+YearDiff = spark.sql("""
+SELECT release_year, COUNT(DISTINCT(title))
+FROM Temporal
+GROUP BY release_year
+""")
+
+# --> YearDiff.show(10,False)
+# +------------+---------------------+
+# |release_year|count(DISTINCT title)|
+# +------------+---------------------+
+# |1959        |582                  |
+# |1990        |1027                 |
+# |1975        |797                  |
+# |1977        |892                  |
+# |1924        |53                   |
+# |2003        |1873                 |
+# |2007        |2763                 |
+# |2018        |5523                 |
+# |1974        |942                  |
+# |2015        |4415                 |
+# +------------+---------------------+
+# only showing top 10 rows
 
 
 
