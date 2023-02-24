@@ -497,7 +497,8 @@ GROUP BY release_year
 
 
 
-
+# Terminar la sesión de Spark
+spark.stop()
 
 
 

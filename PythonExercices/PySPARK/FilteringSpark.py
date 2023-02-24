@@ -166,3 +166,5 @@ of \w, indicating we want to match all alphanumeric characters, ignoring the cas
 expression where we wanted to identify variables with the “re” prefix, \w was followed by 
 the quantifier * to indicate we wanted to include all characters after “re.”
 """
+# Terminar la sesión de Spark
+spark.stop()
