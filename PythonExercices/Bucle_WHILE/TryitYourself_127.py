@@ -26,21 +26,22 @@ AgeMessage: str = "" # Mensaje vació que debe estar antes de comenzar el While.
 
 #Crear el While con la condición que se terminara cuando el conteo sea igual a 0
 while AsientosDisponibles != 0:
-    AgeMessage = int(input(AgeInstructions)) # Se hizo un cast para convertir de str a int.
+    AgeMessage = input(AgeInstructions) # Se hizo un cast para convertir de str a int.
+    Age_two : int = int(AgeMessage) # Se casteo nuevamente en otra variable para que no saliera error.
     AsientosDisponibles -= 1 # Se va reduciendo en 1 cada vez que se ocupe in asiento
     print ('* Asientos disponibles: ' + str(AsientosDisponibles))
 
-    if AgeMessage == 999: # También si queremos que el programa se termine antes usamos break
+    if Age_two == 999: # También si queremos que el programa se termine antes usamos break
         print('\n\t¡Hasta la vista baby!')
         break
 
-    elif AgeMessage <= 3:
+    elif Age_two <= 3:
         print('Tu entrada es gratis.')
 
-    elif AgeMessage in range(4,12):
+    elif Age_two in range(4,11):
         print('Tu entrada cuesta $ 10.00')
 
-    elif AgeMessage >= 12:
+    elif Age_two >= 12:
         print('Tu entrada cuesta $ 15.00')
 
 

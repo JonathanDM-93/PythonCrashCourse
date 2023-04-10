@@ -11,6 +11,6 @@ lenguajes_favoritos: dict = {
 
 for nombre in lenguajes_favoritos.keys():
     print('\n' + '¡El lenguaje favorito de ' + nombre + ' es:')
-    for lenguaje in lenguajes_favoritos[nombre]:
+    for lenguaje in lenguajes_favoritos[nombre]: # Se pone en corchetes porque estamos llamando al iterador que es una lista
         print(lenguaje)
 
