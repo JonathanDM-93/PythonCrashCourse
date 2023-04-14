@@ -68,7 +68,7 @@ FROM View
 # valores de observación
 
 # La función lit en el camino para interactuar con las literales de las columnas
-from pyspark.sql.functions import lit, udf, when, col
+from pyspark.sql.functions import lit, when, col
 
 # Se inserta el cálculo de la media aritmetica en la columna 'mean_popularity'
 ReadDF = ReadDF.withColumn('mean_popularity',lit(MeanPop))
