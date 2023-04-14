@@ -1,4 +1,5 @@
 # Cargar librera
+import pyspark.sql.dataframe
 from pyspark.sql import SparkSession
 # Crear sesión
 spark = SparkSession.builder.appName("Data_Wrangling").getOrCreate()
@@ -65,8 +66,9 @@ FROM View
 # Como vemos con SQL Spark y SQL estandar podemos obtener el mismo resultado
 # Agreguemos esto a todas las filas, ya que necesitamos este valor junto con el valor individual
 # valores de observación
+
 # La función lit en el camino para interactuar con las literales de las columnas
-from pyspark.sql.functions import lit, udf, when
+from pyspark.sql.functions import lit, udf, when, col
 
 # Se inserta el cálculo de la media aritmetica en la columna 'mean_popularity'
 ReadDF = ReadDF.withColumn('mean_popularity',lit(MeanPop))
@@ -172,7 +174,7 @@ df_with_newcols = temp_df.select('id','budget','popularity','newcat').\
 df_with_newcols.show(10,False)
 """
 
-df_with_newcols = ReadDF.select('id','budget','popularity').\
+df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget','popularity').\
     withColumn('budget_cat', when(ReadDF['budget']<10000000,'Small').
                when(ReadDF['budget']<100000000,'Medium').
                otherwise('Big')).withColumn('ratings', when(ReadDF['popularity']<3,'Low').
@@ -196,7 +198,33 @@ df_with_newcols = ReadDF.select('id','budget','popularity').\
 # only showing top 10 rows
 # Figure 2-22 Output of newly created DataFrame with custom columns
 
+# Borrado y renombrando Columnas
+# Tú puedes borrar siempre cualquier columna o columnas usando la función drop
 
+# En el ejemplo se declara una lista 'columns_to_drop' de las columnas del DF que se quieren eliminar
+columns_to_drop: list = ['budget_cat']
+# El cambio se guardara en el DF 'df_with_newcols'
+df_with_newcols : pyspark.sql.dataframe.DataFrame = df_with_newcols.drop(*columns_to_drop)
+
+# Observamos que ya no aparece mas la columna 'budget_cat'
+# print(df_with_newcols.columns)
+# --> ['id', 'budget', 'popularity', 'ratings']
+
+# Para renombrar alguna columna usamos la función withColumnRenamed
+
+df_with_newcols = df_with_newcols.withColumnRenamed('id', 'film_id').withColumnRenamed('ratings', 'film_ratings')
+# --> print(df_with_newcols.columns)
+# --> ['film_id', 'budget', 'popularity', 'film_ratings']
+
+# Si la intención es cambiar multiples nombres a las columnas intenta el siguiente comando
+
+new_names = [('budget', 'film_budget'), ('popularity', 'film_popularity')]
+
+# Aplicando la funcion alias
+df_with_newcols_renamed = df_with_newcols.select(list(map(lambda old,new: col(old).alias(new),*zip(*new_names))))
+
+# Ambos métodos tienen el mismo plan de ejecución, podemos verificar estos cambios
+# usando la funcion printSchema o usando .show()
 
 # Terminar la sesión de Spark
 spark.stop()
