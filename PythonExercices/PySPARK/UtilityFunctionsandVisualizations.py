@@ -174,4 +174,12 @@ WHERE popularity IS NULL""")
 # +---------+
 
 # Step 2: Aplicando funciones de ventana para calcular los deciles
+df_with_newcols = df_with_newcols.select("id","budget","popularity",
+                                         ntile(10).over(Window.partitionBy().orderBy(df_with_newcols['popularity'].
+                                                                                     desc())).alias("decile_rank"))
 
+# Desplegando los valores
+df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),
+                                           max('popularity').alias('max_popularity'),count('popularity'))
+
+df_with_newcols.show()
