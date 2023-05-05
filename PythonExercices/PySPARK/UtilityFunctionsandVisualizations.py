@@ -173,3 +173,5 @@ WHERE popularity IS NULL""")
 # |        0|
 # +---------+
 
+# Step 2: Aplicando funciones de ventana para calcular los deciles
+
