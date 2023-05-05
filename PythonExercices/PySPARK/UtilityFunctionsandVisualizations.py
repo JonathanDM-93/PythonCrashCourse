@@ -174,12 +174,23 @@ WHERE popularity IS NULL""")
 # +---------+
 
 # Step 2: Aplicando funciones de ventana para calcular los deciles
-df_with_newcols = df_with_newcols.select("id","budget","popularity",
-                                         ntile(10).over(Window.partitionBy().orderBy(df_with_newcols['popularity'].
-                                                                                     desc())).alias("decile_rank"))
+df_with_newcols = df_with_newcols.select("id","budget","popularity",ntile(10).over(Window.partitionBy().orderBy(df_with_newcols['popularity'].desc())).alias("decile_rank"))
 
 # Desplegando los valores
-df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),
-                                           max('popularity').alias('max_popularity'),count('popularity'))
+df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),max('popularity').alias('max_popularity'),count('popularity')).show()
 
-df_with_newcols.show()
+# +-----------+------------------+------------------+-----------------+
+# |decile_rank|    min_popularity|    max_popularity|count(popularity)|
+# +-----------+------------------+------------------+-----------------+
+# |          1|5.8629999999999995|        Η Άγνωστος|            11907|
+# |          2|             4.026|5.8629999999999995|            11907|
+# |          3|             3.092|             4.026|            11907|
+# |          4|             2.605|             3.092|            11907|
+# |          5|            16.122|             2.605|            11907|
+# |          6|             1.758|            16.122|            11907|
+# |          7|             1.335|             1.758|            11907|
+# |          8|             0.895|             1.335|            11907|
+# |          9|0.6000000000000001|             0.895|            11906|
+# |         10|       Episode 24 |0.6000000000000001|            11906|
+# +-----------+------------------+------------------+-----------------+
+# Figure 3-3. Output of popularity deciles
