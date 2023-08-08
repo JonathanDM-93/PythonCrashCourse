@@ -25,7 +25,7 @@ ReadDF = spark.read.load("C:/Users/joni_/Downloads/movie_data_tmbd.csv",
                          header="true")
 
 
-# Register the DataFrame as a SQL temporary view
+# Registramos el DataFrame como una vista temporal SQL
 ReadDF.createOrReplaceTempView("View")
 
 # Definamos una lista de las columnas que deseamos imprimir
@@ -66,7 +66,7 @@ df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget',
 # +-----+-------+------------------+----------+-------+
 # only showing top 15 rows
 
-# SI queremos concatenar los valores de la columna budget_cat y ratings en una sola
+# Si queremos concatenar los valores de la columna budget_cat y ratings en una sola
 # columna, lo podemos hacer con la función 'concat'
 # Como primer paso, cambiemos el caso de la nueva columna a lowercase y trim removiendo
 # espacios en blanco usando las funciones trim y lower.
