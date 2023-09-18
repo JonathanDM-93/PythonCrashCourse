@@ -10,11 +10,11 @@ redshift = boto3.client('redshift')
 
 # Crear una conexión al cluster de Redshift
 conexion = psycopg2.connect(
-    host='mycluster.cfvkjcuj27ud.us-east-1.redshift.amazonaws.com',
-    user='mycluster',
-    password='Zamusmetroid10#',
+    host='<NAME_CLUSTER>.cfvkjcuj27ud.<REGION>.redshift.amazonaws.com',
+    user='<NAME_CLUSTER>',
+    password='<PASSWORD_FOR_CLUSTER',
     port=5439,
-    database='dev')
+    database='<NOMBRE_DB')
 
 # Crear cursor para ejecutar consultas SQL
 cursor = conexion.cursor()
