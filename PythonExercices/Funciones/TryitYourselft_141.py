@@ -45,7 +45,7 @@ def custom_shirt():
                     bandera = True
 
         elif tallaCamisa == "Mediana":
-            if 20 <= len(mensajeCamisa) <= 25:
+            if len(mensajeCamisa) >= 15 and len(mensajeCamisa) < 25:
                 print(f"La camisa seleccionada es: {tallaCamisa} y el mensaje será: {mensajeCamisa}")
             else:
                 respuesta = input(
@@ -54,7 +54,7 @@ def custom_shirt():
                     bandera = True
 
         elif tallaCamisa == "Grande":
-            if 30 < len(mensajeCamisa) < 35:
+            if len(mensajeCamisa) >= 25 and len(mensajeCamisa) <= 30:
                 print(f"La camisa seleccionada es: {tallaCamisa} y el mensaje será: {mensajeCamisa}")
                 bandera = False
             else:
@@ -64,3 +64,19 @@ def custom_shirt():
 
 # Llamar a la función
 custom_shirt()
+
+
+# TRY IT YOURSELF pag. 141 8-5 Cities
+# Escribe una función llamada describe_city que acepta el nombre de la ciudad y el pais. La función debera imprimir una
+# simple sentencia como "Reykjavik is Iceland
+
+def describe_city(enter_ciudad, enter_pais):
+    print(f"La ciudad {enter_ciudad} esta en {enter_pais}")
+
+
+# Poner algunos paises
+pais = "México"
+ciudad = "CDMX"
+
+describe_city(ciudad, pais)
+# La ciudad CDMX esta en México
