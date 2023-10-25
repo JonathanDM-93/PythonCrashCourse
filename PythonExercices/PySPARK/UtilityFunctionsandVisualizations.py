@@ -47,7 +47,7 @@ df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget',
                otherwise('Big')).withColumn('ratings', when(ReadDF['popularity']<3,'Low').
                                             when(ReadDF['popularity']<5,'Mid').otherwise('High'))
 # Ver el DataFrame df_with_newcols
-df_with_newcols.show(15, False)
+# df_with_newcols.show(15, False)
 # +-----+-------+------------------+----------+-------+
 # |id   |budget |popularity        |budget_cat|ratings|
 # +-----+-------+------------------+----------+-------+
@@ -74,6 +74,7 @@ df_with_newcols.show(15, False)
 # Como primer paso, cambiemos el caso de la nueva columna a lowercase y trim removiendo
 # espacios en blanco usando las funciones trim y lower.
 
+# Versión en SQL de la sintaxis de pyspark
 view_budget_cat = spark.sql("""
 SELECT id,
         budget,
@@ -90,8 +91,9 @@ SELECT id,
        END AS ratings
 FROM View_ReadDF 
 """)
-view_budget_cat.show(15, False)
-print('Stop')
+# Ver el DataFrame view_budget_cat
+# view_budget_cat.show(15, False)
+
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Concatenado dos variables
