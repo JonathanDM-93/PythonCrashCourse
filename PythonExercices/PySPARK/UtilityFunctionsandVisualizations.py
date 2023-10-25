@@ -94,13 +94,32 @@ FROM View_ReadDF
 # Ver el DataFrame view_budget_cat
 # view_budget_cat.show(15, False)
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# Registramos el DataFrame como una vista temporal SQL
+view_budget_cat.createOrReplaceTempView("budget_cat_concat")
+
+# Haremos una concatenación entre los campos nuevos 'budget_cat' y 'ratings'
+# Hace exactamente lo del codigo de las líneas 117 y 119 con sintaxis de pyspark
+view_budget_cat_concat = spark.sql("""
+SELECT id,
+        budget,
+          popularity,
+           budget_cat,
+            ratings,
+             LOWER(CONCAT(budget_cat, ratings)) AS BudgetRating_Category
+FROM budget_cat_concat
+""")
+
+# Ver el DataFrame view_budget_cat_concat
+# view_budget_cat_concat.show()
+
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Concatenado dos variables
-df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',concat(df_with_newcols.budget_cat,df_with_newcols.ratings))
+df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category', concat(df_with_newcols.budget_cat, df_with_newcols.ratings))
 
 # Cambiando la variable
-df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',trim(lower(df_with_newcols.BudgetRating_Category)))
+df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category', trim(lower(df_with_newcols.BudgetRating_Category)))
 # --> df_with_newcols.show(10,False)
 
 # +-----+------+----------+----------+-------+---------------------+
@@ -121,7 +140,7 @@ df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',trim(lower(
 
 # Registrar un tabla temporal
 
-df_with_newcols.registerTempTable('OneUse')
+df_with_newcols.createOrReplaceTempView('OneUse')
 consulta = spark.sql("""
 SELECT ratings, COUNT(ratings)
 FROM OneUse
@@ -184,7 +203,7 @@ WHERE popularity IS NULL""")
 
 # Tuve que hacer otra vista temporal de la tabla porque se aplicaron los filtros y en esta nueva vista vemos
 # que en el resultado salen 0 nulos que ya fueron discriminados
-df_with_newcols.registerTempTable('TwoUse')
+df_with_newcols.createOrReplaceTempView('TwoUse')
 
 after_filter_nulos = spark.sql("""
 SELECT COUNT(*) AS Num_Nulos
