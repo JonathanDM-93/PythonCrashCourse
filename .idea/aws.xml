@@ -15,9 +15,6 @@
       </list>
     </option>
   </component>
-  <component name="connectionManager">
-    <option name="activeConnectionId" value="AwsConnectionManagerConnection" />
-  </component>
   <component name="connectionPinningManager">
     <option name="doNotPromptForPinning" value="true" />
     <option name="pinnedConnections">

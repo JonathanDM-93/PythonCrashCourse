@@ -25,9 +25,6 @@ ReadDF = spark.read.load("C:/Users/joni_/Downloads/movie_data_tmbd.csv",
                          header="true")
 
 
-# Registramos el DataFrame como una vista temporal SQL
-ReadDF.createOrReplaceTempView("View")
-
 # Definamos una lista de las columnas que deseamos imprimir
 select_columnas: list = ["id", "budget", "popularity", "release_date", "revenue", "title"]
 
@@ -35,8 +32,14 @@ select_columnas: list = ["id", "budget", "popularity", "release_date", "revenue"
 ReadDF = ReadDF.select(*select_columnas)
 # --> ReadDF.show(10,False)
 
+# Registramos el DataFrame como una vista temporal SQL
+ReadDF.createOrReplaceTempView("View_ReadDF")
+
 
 # Funciones de String
+# Lo que describe la siguiente sentencia es lo siguiente:
+# DEL DATAFRAME 'ReadDF' SELECCIONA LOS CAMPOS 'id','budget','popularity' Y EN CAMPO NUEVO 'budget_cat' Y ENTRA EN
+# CONDICIONES PARA GENERAR CIERTOS CAMPOS DE ACUERDO A CIERTO RANGO.
 
 df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget','popularity'). \
     withColumn('budget_cat', when(ReadDF['budget']<10000000,'Small').
@@ -44,7 +47,7 @@ df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget',
                otherwise('Big')).withColumn('ratings', when(ReadDF['popularity']<3,'Low').
                                             when(ReadDF['popularity']<5,'Mid').otherwise('High'))
 # Ver el DataFrame df_with_newcols
-# --> df_with_newcols.show(15, False)
+df_with_newcols.show(15, False)
 # +-----+-------+------------------+----------+-------+
 # |id   |budget |popularity        |budget_cat|ratings|
 # +-----+-------+------------------+----------+-------+
@@ -71,6 +74,26 @@ df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget',
 # Como primer paso, cambiemos el caso de la nueva columna a lowercase y trim removiendo
 # espacios en blanco usando las funciones trim y lower.
 
+view_budget_cat = spark.sql("""
+SELECT id,
+        budget,
+         popularity,
+       CASE
+         WHEN budget < 10000000 THEN 'Small'
+         WHEN budget < 100000000 THEN 'Medium'
+         ELSE 'Big'
+        END AS budget_cat,
+       CASE
+        WHEN popularity < 3 THEN 'Low'
+        WHEN popularity < 5 THEN 'Mid'
+        ELSE 'High'
+       END AS ratings
+FROM View_ReadDF 
+""")
+view_budget_cat.show(15, False)
+print('Stop')
+
+# -------------------------------------------------------------------------------------------------------------------- #
 # Concatenado dos variables
 df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',concat(df_with_newcols.budget_cat,df_with_newcols.ratings))
 
@@ -177,7 +200,8 @@ WHERE popularity IS NULL""")
 df_with_newcols = df_with_newcols.select("id","budget","popularity",ntile(10).over(Window.partitionBy().orderBy(df_with_newcols['popularity'].desc())).alias("decile_rank"))
 
 # Desplegando los valores
-df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),max('popularity').alias('max_popularity'),count('popularity')).show()
+df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),max('popularity').alias('max_popularity'),count('popularity'))
+# df_with_newcols.show()
 
 # +-----------+------------------+------------------+-----------------+
 # |decile_rank|    min_popularity|    max_popularity|count(popularity)|
