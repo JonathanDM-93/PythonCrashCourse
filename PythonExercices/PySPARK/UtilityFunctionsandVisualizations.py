@@ -9,7 +9,6 @@
 # * Introducción a ML
 
 
-
 # Cargar librera
 import pyspark.sql.dataframe
 from pyspark.sql import SparkSession
@@ -24,7 +23,6 @@ ReadDF = spark.read.load("C:/Users/joni_/Downloads/movie_data_tmbd.csv",
                          inferSchema="true",
                          header="true")
 
-
 # Definamos una lista de las columnas que deseamos imprimir
 select_columnas: list = ["id", "budget", "popularity", "release_date", "revenue", "title"]
 
@@ -35,17 +33,16 @@ ReadDF = ReadDF.select(*select_columnas)
 # Registramos el DataFrame como una vista temporal SQL
 ReadDF.createOrReplaceTempView("View_ReadDF")
 
-
 # Funciones de String
 # Lo que describe la siguiente sentencia es lo siguiente:
 # DEL DATAFRAME 'ReadDF' SELECCIONA LOS CAMPOS 'id','budget','popularity' Y EN CAMPO NUEVO 'budget_cat' Y ENTRA EN
 # CONDICIONES PARA GENERAR CIERTOS CAMPOS DE ACUERDO A CIERTO RANGO.
 
-df_with_newcols : pyspark.sql.dataframe.DataFrame = ReadDF.select('id','budget','popularity'). \
-    withColumn('budget_cat', when(ReadDF['budget']<10000000,'Small').
-               when(ReadDF['budget']<100000000,'Medium').
-               otherwise('Big')).withColumn('ratings', when(ReadDF['popularity']<3,'Low').
-                                            when(ReadDF['popularity']<5,'Mid').otherwise('High'))
+df_with_newcols: pyspark.sql.dataframe.DataFrame = ReadDF.select('id', 'budget', 'popularity'). \
+    withColumn('budget_cat', when(ReadDF['budget'] < 10000000, 'Small').
+               when(ReadDF['budget'] < 100000000, 'Medium').
+               otherwise('Big')).withColumn('ratings', when(ReadDF['popularity'] < 3, 'Low').
+                                            when(ReadDF['popularity'] < 5, 'Mid').otherwise('High'))
 # Ver el DataFrame df_with_newcols
 # df_with_newcols.show(15, False)
 # +-----+-------+------------------+----------+-------+
@@ -116,10 +113,12 @@ FROM budget_cat_concat
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Concatenado dos variables
-df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category', concat(df_with_newcols.budget_cat, df_with_newcols.ratings))
+df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',
+                                             concat(df_with_newcols.budget_cat, df_with_newcols.ratings))
 
 # Cambiando la variable
-df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category', trim(lower(df_with_newcols.BudgetRating_Category)))
+df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category',
+                                             trim(lower(df_with_newcols.BudgetRating_Category)))
 # --> df_with_newcols.show(10,False)
 
 # +-----+------+----------+----------+-------+---------------------+
@@ -138,7 +137,9 @@ df_with_newcols = df_with_newcols.withColumn('BudgetRating_Category', trim(lower
 # +-----+------+----------+----------+-------+---------------------+
 # only showing top 10 rows
 
-# Registrar un tabla temporal
+# --- SEPARADOR --- #
+
+# Registrar un tabla temporal pag. 63
 
 df_with_newcols.createOrReplaceTempView('OneUse')
 consulta = spark.sql("""
@@ -161,7 +162,8 @@ GROUP BY ratings""")
 from pyspark.sql.window import *
 
 # Step 1: Filtra los valores faltantes
-df_with_newcols = df_with_newcols.filter((df_with_newcols['popularity'].isNotNull()) & (~isnan(df_with_newcols['popularity'])))
+df_with_newcols = df_with_newcols.filter(
+    (df_with_newcols['popularity'].isNotNull()) & (~isnan(df_with_newcols['popularity'])))
 # df_with_newcols.show(10,False)
 # +-----+------+----------+----------+-------+---------------------+
 # |id   |budget|popularity|budget_cat|ratings|BudgetRating_Category|
@@ -218,10 +220,12 @@ WHERE popularity IS NULL""")
 # +---------+
 
 # Step 2: Aplicando funciones de ventana para calcular los deciles
-df_with_newcols = df_with_newcols.select("id","budget","popularity",ntile(10).over(Window.partitionBy().orderBy(df_with_newcols['popularity'].desc())).alias("decile_rank"))
+df_with_newcols = df_with_newcols.select("id", "budget", "popularity", ntile(10).over(
+    Window.partitionBy().orderBy(df_with_newcols['popularity'].desc())).alias("decile_rank"))
 
-# Desplegando los valores
-df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),max('popularity').alias('max_popularity'),count('popularity'))
+# Step 3: Desplegando los valores
+df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_popularity'),
+                                           max('popularity').alias('max_popularity'), count('popularity'))
 # df_with_newcols.show()
 
 # +-----------+------------------+------------------+-----------------+
@@ -239,3 +243,46 @@ df_with_newcols.groupby("decile_rank").agg(min('popularity').alias('min_populari
 # |         10|       Episode 24 |0.6000000000000001|            11906|
 # +-----------+------------------+------------------+-----------------+
 # Figure 3-3. Output of popularity deciles
+
+# -------------------------------------------------------------------------------------------------------------------- #
+
+# Página 67
+# Paso 1. Importa las funciones de ventana
+from pyspark.sql.window import *
+
+# Paso 2. Seleccionar el subconjunto de datos
+df_second_best = ReadDF.select('id', 'popularity', 'release_date')
+# df_second_best.show(5, False)
+
+# +-----+----------+------------+
+# |id   |popularity|release_date|
+# +-----+----------+------------+
+# |43000|3.892     |1962-05-23  |
+# |43001|5.482     |1962-11-12  |
+# |43002|8.262     |1962-05-24  |
+# |43003|7.83      |1975-03-12  |
+# |43004|5.694     |1962-10-09  |
+# +-----+----------+------------+
+# only showing top 5 rows
+
+# df_second_best.printSchema()
+# root
+#  |-- id: integer (nullable = true)
+#  |-- popularity: string (nullable = true)
+#  |-- release_date: string (nullable = true)
+
+# Paso 3. Crea una columna que contenga el año, extraido del campo release_year
+
+df_second_best = df_second_best.withColumn('release_year', year('release_date')).drop('release_date')
+
+# df_second_best.show(5, False)
+
+# +-----+----------+------------+
+# |id   |popularity|release_year|
+# +-----+----------+------------+
+# |43000|3.892     |1962        |
+# |43001|5.482     |1962        |
+# |43002|8.262     |1962        |
+# |43003|7.83      |1975        |
+# |43004|5.694     |1962        |
+# +-----+----------+------------+
