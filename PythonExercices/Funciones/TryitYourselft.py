@@ -8,7 +8,30 @@ def city_country(enter_city, enter_country):
 
 
 cityCountry: str = city_country("méxico", "cdmx")
+
+
 # print(cityCountry)
 # México, Cdmx
 
+# TRY IT YOURSELF pag. 146 8-7 Album
+def make_album(nameArtist, albumTitle, numsTraks=''):
+    disco: dict = {'name': nameArtist,
+                   'album': albumTitle, }
+    if numsTraks:
+        disco['canciones'] = numsTraks
+    return disco
 
+
+# Declarar un contador
+contador = 0
+# Declarar un límite de entradas
+limitDict = 2
+
+# Solo permite el ingreso de tres diccionarios
+while contador <= limitDict:
+    ingresaArtista = input("Ingresa el nombre del Artista: ")
+    ingresaAlbum = input("Ingresa nombre del Albúm: ")
+    ingresaCanciones = input("Ingresa el número canciones: ")
+    artistAlbum = make_album(ingresaArtista, ingresaAlbum,ingresaCanciones)
+    print(artistAlbum)
+    contador += 1
