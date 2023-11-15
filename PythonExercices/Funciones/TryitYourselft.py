@@ -32,6 +32,14 @@ while contador <= limitDict:
     ingresaArtista = input("Ingresa el nombre del Artista: ")
     ingresaAlbum = input("Ingresa nombre del Albúm: ")
     ingresaCanciones = input("Ingresa el número canciones: ")
-    artistAlbum = make_album(ingresaArtista, ingresaAlbum,ingresaCanciones)
-    print(artistAlbum)
-    contador += 1
+
+    # Aunque el límite es de 3 Artistas, puedes terminar antes sio ingresas 'no'
+    terminarAntes = input("¿Quieres agregar otro Artista? (si/no) ")
+    if terminarAntes == 'no':
+        break
+
+    # O puedes continuar ingresando hasta llegar al limite de 3
+    elif terminarAntes == 'si':
+        artistAlbum = make_album(ingresaArtista, ingresaAlbum, ingresaCanciones)
+        print(artistAlbum)
+        contador += 1
