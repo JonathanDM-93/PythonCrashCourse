@@ -13,6 +13,7 @@ def make_pizza(*toppings):
 
 make_pizza('pepperoni')
 make_pizza('champiniones', 'piña', 'extra queso')
+
 # ('pepperoni',)
 # ('champiniones', 'piña', 'extra queso')
 
@@ -25,3 +26,22 @@ make_pizza('champiniones', 'piña', 'extra queso')
 # El asterisco en el nombre del argumento le dice a python hacer un tupla vacía y almacenar cualquier valor que se
 # reciba dentro de esta tupla.
 
+print("\n[*]\n")
+
+
+# Combinando argumentos de posición y arbitrarios
+# En este caso se tiene que colocar el argumento que acepta varios parámetros al ultimo de la definición de la función.
+
+# Digamos que queremos hacer un hotdog, y el primer parametro se define el tamaño y por ultimo los complementos.
+
+def make_hot_dog(size, *complementos):
+    """Crear un hotdog de cierto tamaño con complementos"""
+    longitud: int = int(size)
+    print(f"Crea un hotdog de tamaño (cm): {longitud}")
+
+    # El for imprime cada uno de los elementos provenientes del argumento *complementos
+    for complemento in complementos:
+        print(complemento)
+
+
+make_hot_dog(12, 'jitomate', 'tocino', 'mostaza')
