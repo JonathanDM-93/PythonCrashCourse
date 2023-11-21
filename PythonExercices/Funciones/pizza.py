@@ -7,10 +7,21 @@
 
 def make_pizza(*toppings):
     """Imprime la lista de toppings que han sido solicitados"""
-    print(toppings)
+    for topping in toppings:
+        print("- " + topping)
 
 
 make_pizza('pepperoni')
 make_pizza('champiniones', 'piña', 'extra queso')
 # ('pepperoni',)
 # ('champiniones', 'piña', 'extra queso')
+
+# Versión 2 de la función
+# - pepperoni
+# - champiniones
+# - piña
+# - extra queso
+
+# El asterisco en el nombre del argumento le dice a python hacer un tupla vacía y almacenar cualquier valor que se
+# reciba dentro de esta tupla.
+
