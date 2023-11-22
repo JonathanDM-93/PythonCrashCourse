@@ -16,7 +16,7 @@
 
 def make_pizza(size, *toppings):
     """Imprime la lista de toppings que han sido solicitados"""
-    print(f"\n Cocinando a {str(size)} -pulgadas con los siguientes ingredientes: ")
+    print(f"\n Cocinando una pizza de {str(size)} -pulgadas con los siguientes ingredientes: ")
     for topping in toppings:
         print("- " + topping)
 
