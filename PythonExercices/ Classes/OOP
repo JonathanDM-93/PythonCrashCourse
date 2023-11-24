@@ -1,0 +1,19 @@
+    Programación Orientada a Objetos es una de las aproximaciones mas efectivas para escribir software. En programación
+OOP tu puedes escribir clases que representas cosas del mundo real y situaciones creado 'objetos' basados en estas
+clases. Cuando escribes una clase tu defines el comportamiento general que toda la categoría de los objetos pueden tener.
+
+    Cuando tu creas objetos individuales desde una clase, cada objeto es automáticamente equipado con el comportamiento
+general, tu puedes dar a cada objeto cualquier rasgo que tu quieras.
+
+    Creando un objeto desde una clase a esto de le llama 'creación de instancias' y tu puedes crear instancias a partir
+de una clase. En este cápitulo tu escribirás clases y crearas instancias de una clase. Tu podrás especificar el tipo de
+información que puede ser almacenada en una instancia, y tu podrás definir las acciones que pueden tomas esas instancias
+Tu también escribirás clases que pueden extender su funcionalidad de clases existentes, entonces clases similares pueden
+compartir código eficientemente. Tu puedes escribir clases en módulos e importar clases que otros programadores hicieron
+en tu propio programa.
+    Entender POO puede ayudarte a ver el mundo como un programador lo hace. Esto te ayudara a realmente entender tu
+código no solo a saber que sucede line a linea, pero grandes conceptos te esperan. Conocer la logica detrás de las clases
+entrenaras como pensar con lógica y podrás escribir programas efectivamente encontrando la solución a los problemas que
+te encuentres.
+
+
