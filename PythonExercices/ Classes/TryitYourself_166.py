@@ -13,7 +13,7 @@ class Resturant():
         print(f"El tipo de cocina es: {self.cuisine_type.title()}")
 
     def open_restaurant(self):
-        print(f"El restaurante {self.restaurant_name.title()} esta abierto!")
+        print(f"El restaurante: {self.restaurant_name.title()} esta abierto! y servirán: {self.cuisine_type.title()}")
 
 
 # Crear una instancia/objeto.
