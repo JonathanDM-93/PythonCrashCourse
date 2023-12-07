@@ -13,7 +13,7 @@ class Resturant():
         print(f"El tipo de cocina es: {self.cuisine_type.title()}")
 
     def open_restaurant(self):
-        print(f"El restaurante: {self.restaurant_name.title()} esta abierto! y servirán: {self.cuisine_type.title()}")
+        print(f"El restaurante: {self.restaurant_name.title()} esta abierto! y servirán comida: {self.cuisine_type.title()}")
 
 
 # Crear una instancia/objeto.
@@ -30,4 +30,30 @@ restaurant.open_restaurant()
 # Y su especialidad es: Asados
 # El restaurante Los Locos Asados está abierto
 
+print("\n[*]\n")
 
+# TRY IT YOURSELF pag. 166 9-2 Three Restaurants
+# Toma la clase anterior y crea tres diferentes instancias a partir de la clase y llama a describe_restaurant() para
+# cada instancia.
+
+# Crear instancias/objetos
+restautantItalian = Resturant("Little Italy", "Italiana")
+# Acceder a los métodos/funciones de la clase.
+restautantItalian.describe_restaurant()
+
+# Crear instancias/objetos
+restaurantMexican = Resturant("El Grito de Guerra", "Mexicana")
+# Acceder a los métodos/funciones de la clase.
+restaurantMexican.describe_restaurant()
+
+# Crear instancias/objetos
+restaurantChinesse = Resturant("El ojos de regalo", "China")
+# Acceder a los métodos/funciones de la clase.
+restaurantChinesse.describe_restaurant()
+
+# El nombre del restaurante es: Little Italy
+# El tipo de cocina es: Italiana
+# El nombre del restaurante es: El Grito De Guerra
+# El tipo de cocina es: Mexicana
+# El nombre del restaurante es: El Ojos De Regalo
+# El tipo de cocina es: China
