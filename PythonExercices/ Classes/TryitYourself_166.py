@@ -70,6 +70,7 @@ print("\n[*]\n")
 # 4.- Crea un segundo método llamado greet_user() que imprima un saludo personalizado para el usuario.
 
 
+
 class User:
     """Initialize attributes"""
 
