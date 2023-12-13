@@ -24,6 +24,10 @@ class Car():
         else:
             print("No puedes regresar el el kilometraje del odometer!")
 
+    def increment_odometer(self, miles):
+        """Add the given amount to the odometer reading"""
+        self.odometer_reading += miles
+
 
 # ------------------------------------------------------------------------------- #
 
@@ -61,3 +65,25 @@ secondCar.update_odometer(4999)
 # No puedes regresar el el kilometraje del odometer!
 # ------------------------------------------------------------------------------- #
 print("\n[*]\n")
+
+# Creamos una instancia/objeto nuevo
+jhonnysCar = Car("Nissan", "Gtr", "2023")
+
+# Llamamos al método describe()
+print(jhonnysCar.get_describe_name())
+
+# Llamamos al método update_odometer()
+jhonnysCar.update_odometer(6320)
+
+# LLamamos al método read_odometer() para que me imprima el valor del odometro
+jhonnysCar.read_odometer()
+
+# Llamamos a la funcion increment_odometer
+jhonnysCar.increment_odometer(1200)
+
+# Llamar nuevamente al método read_odometer() para ver la actualización
+jhonnysCar.read_odometer()
+
+# 2023 Nissan Gtr
+# This car has 6320 miles on it.
+# This car has 7520 miles on it.
