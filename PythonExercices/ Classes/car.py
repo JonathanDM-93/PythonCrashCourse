@@ -19,7 +19,10 @@ class Car():
 
     def update_odometer(self, mileage):
         """Set the odometer reading to the given value"""
-        self.odometer_reading = mileage
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print("No puedes regresar el el kilometraje del odometer!")
 
 
 # ------------------------------------------------------------------------------- #
@@ -49,9 +52,12 @@ secondCar = Car("Vento", "Starline", "2019")
 print(secondCar.get_describe_name())
 
 # LLamar al método que nos permite cambiar el valor del odometro
-secondCar.update_odometer(50000)
+secondCar.update_odometer(5000)
 
 secondCar.read_odometer()
 
+# Modificar el kilometraje del odometer del objeto secondCar y generar la salida del else
+secondCar.update_odometer(4999)
+# No puedes regresar el el kilometraje del odometer!
 # ------------------------------------------------------------------------------- #
 print("\n[*]\n")
