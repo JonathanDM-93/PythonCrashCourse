@@ -29,6 +29,7 @@ class Car:
         self.odometer_reading += miles
 
 
+# El nombre de la clase padre debe ir dentro de los parentesis en la definición de la clase hija.
 class ElectricCar(Car):
     def __init__(self, make: str, model: str, year: str):
         """Connection between parent class and child class"""
