@@ -1,7 +1,7 @@
 # TRY IT YOURSELF pag. 166 9-1 Restaurant
 # Crea una una clase llamada restaurante.
 
-class Resturant():
+class Resturant:
     """Initialize restaurant_name and cuisine_type attributes"""
 
     def __init__(self, restaurant_name, cuisine_type):
@@ -70,7 +70,6 @@ print("\n[*]\n")
 # 4.- Crea un segundo método llamado greet_user() que imprima un saludo personalizado para el usuario.
 
 
-
 class User:
     """Initialize attributes"""
 
@@ -99,4 +98,3 @@ oneUser.greet_user()
 
 # Llamar al método/función describe_user() la cual imprime la data del usuario.
 oneUser.describe_user()
-
