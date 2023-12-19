@@ -43,3 +43,9 @@ myToyota = ElectricCar("Toyota", "Yaris", "2023")
 
 # Llamar al método/función de la parent class
 print(myToyota.get_describe_name())
+
+# De acuerdo con el libro: "La clase hija hereda cada atributo y método[función] de la clase padre pero la clase hija
+# tiene la libertad de definir nuevos atributos y método por su cuenta.
+
+# De acuerdo con la continuidad del libro seguiremos trabajando con este archivo .py y la clase car pero ahora se
+# definirán atributos y métodos[funciones] de la clase hija.
