@@ -32,6 +32,8 @@ class Car:
 # El nombre de la clase padre debe ir dentro de los parentesis en la definición de la clase hija.
 class ElectricCar(Car):
     def __init__(self, make: str, model: str, year: str):
+        """Initialize attributes of the parent class.
+        Then initialize attributes specific to an electric car"""
         """Connection between parent class and child class"""
         super().__init__(make, model, year)
 
@@ -49,3 +51,5 @@ print(myToyota.get_describe_name())
 
 # De acuerdo con la continuidad del libro seguiremos trabajando con este archivo .py y la clase car pero ahora se
 # definirán atributos y métodos[funciones] de la clase hija.
+
+
