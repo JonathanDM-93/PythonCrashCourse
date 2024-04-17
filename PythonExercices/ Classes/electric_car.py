@@ -37,6 +37,9 @@ class ElectricCar(Car):
         """Connection between parent class and child class"""
         super().__init__(make, model, year)
 
+        """Crear atributos que pertenecen a la clase hija"""
+        self.batery_size = 70
+
 
 # ----------------------------------------------------------- #
 
@@ -45,9 +48,10 @@ myToyota = ElectricCar("Toyota", "Yaris", "2023")
 
 # Llamar al método/función de la parent class
 print(myToyota.get_describe_name())
+# >> 2023 Toyota Yaris
 
-# De acuerdo con el libro: "La clase hija hereda cada atributo y método[función] de la clase padre pero la clase hija
-# tiene la libertad de definir nuevos atributos y método por su cuenta.
+# De acuerdo con el libro: "La clase hija hereda cada atributo y método[función] de la clase, pero la clase hija
+# tiene la libertad de definir nuevos atributos y método por su cuenta".
 
 # De acuerdo con la continuidad del libro seguiremos trabajando con este archivo .py y la clase car pero ahora se
 # definirán atributos y métodos[funciones] de la clase hija.
