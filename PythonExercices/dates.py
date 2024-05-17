@@ -51,9 +51,12 @@ def calcular12_Mes_Atras(master_date):
 
 def get_bloque(master_date):
     """
-
+    Obtain a block of dates related to the given master date.
     :param master_date: A string representing the master date in the format 'YYYY-MM-DD'.
     :return:
+    list: A list containing the master date, the last day of the month following the master date,
+    the date 12 months ago from the master date, and the date 12 months ago from the last day of
+    the month following the master date.
     """
     next_mont_master_date = ultimo_dia_siguiente_mes(master_date)  # <class 'str'>
 
@@ -69,7 +72,13 @@ def get_bloque(master_date):
 # Ejemplo de uso Asignar el mes inicial del bimestre a calcular
 master_date = '2024-01-01'
 
+# Llamar a la función para tener el primer bloque de fechas.
 bloque_fechas_1 = get_bloque(master_date)
+
+# Pasar la lista a las variables de fecha
+Block1Master_Date, Block1nextMonthMasterDate, Block1pastYearMasterDate, Block1pastYearNextMonthMasterDate = bloque_fechas_1
+
+
 print(bloque_fechas_1)  # ['2024-01-01', '2024-02-29', '2023-01-01', '2023-02-28']
 
 # Convertir a un formato válido para el manejo de fechas
@@ -83,5 +92,9 @@ masterDate_BackTwoMonths = masterDate_BackTwoMonths.strftime("%Y-%m-%d")
 
 print(f"Restar dos meses a master_date: {masterDate_BackTwoMonths}")
 
+# Llamar a la función para tener el segundo bloque de fechas.
 bloque_fechas_2 = get_bloque(masterDate_BackTwoMonths)
+
+# Pasar la lista a las variables de fecha
+Block2Master_Date, Block2nextMonthMasterDate, Block2pastYearMasterDate, Block2pastYearNextMonthMasterDate = bloque_fechas_2
 print(bloque_fechas_2)
