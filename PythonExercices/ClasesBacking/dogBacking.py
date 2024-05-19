@@ -35,5 +35,7 @@ print("My dog is " + str(my_dog.age) + " years old.")
 # Después de crear una instancia de la clase Dog, nosotros podemos usar la notación punto para llamar cualquier
 # método definido en la clase Dog()
 
-# Método sit()
+# Para llamar al método que tú quieres, proporciona el nombre de la instancia seguido del método/función que necesites
+# separado por el punto [.]
 my_dog.sit()
+my_dog.roll_over()
