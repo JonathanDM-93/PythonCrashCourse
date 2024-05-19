@@ -6,13 +6,13 @@ class Dog:
         self.name = name
         self.age = age
 
-        def sit(self):
-            """Simulate a dog sitting in response to a command."""
-            print(self.name.title() + " is now sitting.")
+    def sit(self):
+        """Simulate a dog sitting in response to a command."""
+        print(self.name.title() + " is now sitting.")
 
-        def roll_over(self):
-            """Simulate rolling over in response to a command"""
-            print(self.name.title() + " rolled over!")
+    def roll_over(self):
+        """Simulate rolling over in response to a command"""
+        print(self.name.title() + " rolled over!")
 
 
 # Creemos una instancia que cree un perro.
@@ -27,3 +27,13 @@ print("My dog is " + str(my_dog.age) + " years old.")
 
 # Aquí únicamente estoy llamando a las variables name & age que son llamadas "atributos" y como vemos solo toma
 # la variable o atributo.
+
+# Atributos
+# Para acceder a los atributos de una instancia/objeto debes usar la notación [.]
+
+# Llamando a los métodos/funciones
+# Después de crear una instancia de la clase Dog, nosotros podemos usar la notación punto para llamar cualquier
+# método definido en la clase Dog()
+
+# Método sit()
+my_dog.sit()
