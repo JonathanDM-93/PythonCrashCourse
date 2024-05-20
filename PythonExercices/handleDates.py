@@ -42,13 +42,15 @@ class MasterDate:
         # Regresa una lista con el formato
         return [date.strftime('%Y-%m-%d') for date in dates]
 
+    def edges_0(self):
+        """Calcula tres meses atrás a partir de master_date"""
+        master_date = self.masterFormat()
 
-Ingresar_MasterDate = MasterDate("2023-10-01")
-FechaCorrect = Ingresar_MasterDate.masterFormat()
-print(FechaCorrect)
+        # Calcular las fechas deseadas
+        dates = [
+            master_date - relativedelta(months=3)]
+        # Ordena las fechas
+        dates.sort()
+        # Regresa una lista con el formato
+        return [date.strftime('%Y-%m-%d') for date in dates]
 
-fechas_calculadas_tla117_1 = Ingresar_MasterDate.tla117_1()
-print(fechas_calculadas_tla117_1)
-
-fechas_calculadas_tla117_0 = Ingresar_MasterDate.tla117_0()
-print(fechas_calculadas_tla117_0)
