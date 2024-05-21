@@ -47,10 +47,9 @@ class MasterDate:
         master_date = self.masterFormat()
 
         # Calcular las fechas deseadas
-        dates = [
-            master_date - relativedelta(months=3)]
-        # Ordena las fechas
-        dates.sort()
+        date = master_date - relativedelta(months=3)
         # Regresa una lista con el formato
-        return [date.strftime('%Y-%m-%d') for date in dates]
+        conversion = date.strftime('%Y-%m-%d')
+        return conversion
+
 
