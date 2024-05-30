@@ -1,7 +1,5 @@
-from datetime import datetime
-
+from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
-
 
 class MasterDate:
 
@@ -56,9 +54,16 @@ class MasterDate:
         """Calcula tres meses atrás a partir de master_date"""
         master_date = self.masterFormat()
 
-        # Calcular las fechas deseadas
-        date = master_date - relativedelta(months=3)
+        # Calcular la fecha tres meses atras de masterDate
+        datelast3Months = master_date - relativedelta(months=3)
+
+        lastDayMonth = datelast3Months.replace(day=28) + timedelta(days=4)
+        lastDayMonth = lastDayMonth - timedelta(days=lastDayMonth.day)
+
         # Regresa una lista con el formato
-        conversion = date.strftime('%Y-%m-%d')
-        # conversion = conversion[0:7]
-        return conversion
+        datelast3Months = datelast3Months.strftime('%Y-%m-%d')
+        lastDayMonth = lastDayMonth.strftime('%Y-%m-%d')
+
+        return datelast3Months, lastDayMonth
+
+
