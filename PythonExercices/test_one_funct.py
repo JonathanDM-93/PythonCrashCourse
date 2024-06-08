@@ -66,7 +66,7 @@ path_content: list = ['_SUCCESS',
                       'cutoff_date=2022-09-01',
                       'cutoff_date=2023-10-01',
                       'cutoff_date=2023-11-01',
-                      'cutoff_date=2022-07-01',
+                      'cutoff_date=1',
                       'cutoff_date=2023-07-01',
                       'cutoff_date=2024-02-01',
                       'cutoff_date=2022-11-01']
@@ -86,22 +86,4 @@ for path_i in path_content:
         # Si cumple el regex, se almacenara en la lista
         dates_checkRegex.append(date_str_i)
 
-#-------------------------------------------------------------------------------------------------------#
-
-# Convertir la fecha objetivo a un objeto datetime
-MASTER_DATE = datetime.strptime(oneDate, '%Y-%m-%d').date()
-
-# Inicializar la variable para la fecha resultante
-closest_previous_date = None
-
-# Encontrar la fecha más cercana anterior a oneDate si oneDate no está en la lista
-if oneDate not in dates_checkRegex:
-    for date_str in dates_checkRegex:
-        #Itera en la lista de fechas y les cambia el formato
-        date_dt = datetime.strptime(date_str, '%Y-%m-%d').date()
-        if date_dt < MASTER_DATE:
-            if closest_previous_date is None or date_dt > closest_previous_date:
-                closest_previous_date = date_dt
-
-
-print(closest_previous_date)
+print(dates_checkRegex)
