@@ -50,11 +50,11 @@ class MasterDate:
         conversion = date.strftime('%Y-%m-%d')
         return conversion
 
-    def campaingTracking(self):
+    def respuestas(self):
         """Calcula tres meses atrás a partir de master_date"""
         master_date = self.masterFormat()
 
-        # Calcular la fecha tres meses atras de masterDate
+        # Calcular la fecha tres meses atrás de masterDate
         datelast3Months = master_date - relativedelta(months=3)
 
         lastDayMonth = datelast3Months.replace(day=28) + timedelta(days=4)
