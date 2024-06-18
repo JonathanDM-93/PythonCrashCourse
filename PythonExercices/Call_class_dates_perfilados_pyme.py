@@ -18,4 +18,5 @@ print(f" FECHAS EDGES_O: {fecha_calculada_edges_0}")
 fecha_calculada_campTracking = Ingresar_MasterDate.respuestas()
 print(f"FECHA RESPUESTAS: {fecha_calculada_campTracking}")
 
-
+fecha_calculada_prestamos_anuales_0 = Ingresar_MasterDate.prestamos_anuales_0()
+print(f"FECHA PRESTAMOS ANUALES: {fecha_calculada_prestamos_anuales_0}")
