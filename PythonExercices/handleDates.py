@@ -75,10 +75,29 @@ class MasterDate:
         datelast3Months = master_date - relativedelta(months=3)
         datelastyear = datelast3Months - relativedelta(months=11)
 
+        last_day_of_month = (datelast3Months.replace(day=1) + relativedelta(months=1)) - timedelta(days=1)
+
         # Regresa las variables en formato de fecha string
-        datelast3Months = datelast3Months.strftime('%Y-%m-%d')
+        last_day_of_month = last_day_of_month.strftime('%Y-%m-%d')
         datelastYear = datelastyear.strftime('%Y-%m-%d')
 
-        listdates = [datelastYear, datelast3Months]
+        listdates = [datelastYear, last_day_of_month]
+        # Regresa una lista con el formato
+        return listdates
+
+    def prestamos_anuales_1(self):
+        """Calcula tres meses atrás a partir de master_date"""
+        master_date = self.masterFormat()
+
+        # Calcular las fechas deseadas
+        datelastyear = master_date - relativedelta(months=11)
+
+        last_day_of_month = (master_date.replace(day=1) + relativedelta(months=1)) - timedelta(days=1)
+
+        # Regresa las variables en formato de fecha string
+        master_date_f = last_day_of_month.strftime('%Y-%m-%d')
+        datelastYear = datelastyear.strftime('%Y-%m-%d')
+
+        listdates = [datelastYear, master_date_f]
         # Regresa una lista con el formato
         return listdates

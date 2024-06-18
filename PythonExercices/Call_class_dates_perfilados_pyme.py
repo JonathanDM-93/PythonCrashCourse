@@ -19,4 +19,7 @@ fecha_calculada_campTracking = Ingresar_MasterDate.respuestas()
 print(f"FECHA RESPUESTAS: {fecha_calculada_campTracking}")
 
 fecha_calculada_prestamos_anuales_0 = Ingresar_MasterDate.prestamos_anuales_0()
-print(f"FECHA PRESTAMOS ANUALES: {fecha_calculada_prestamos_anuales_0}")
+print(f"FECHA PRESTAMOS ANUALES_0: {fecha_calculada_prestamos_anuales_0}")
+
+fecha_calculada_prestamos_anuales_1 = Ingresar_MasterDate.prestamos_anuales_1()
+print(f"FECHA PRESTAMOS ANUALES_1: {fecha_calculada_prestamos_anuales_1}")
