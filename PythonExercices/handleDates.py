@@ -1,6 +1,7 @@
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
 
+
 class MasterDate:
 
     def __init__(self, Mater_date):
@@ -78,8 +79,6 @@ class MasterDate:
         datelast3Months = datelast3Months.strftime('%Y-%m-%d')
         datelastYear = datelastyear.strftime('%Y-%m-%d')
 
-        return datelastYear, datelast3Months
-
-
-
-
+        listdates = [datelastYear, datelast3Months]
+        # Regresa una lista con el formato
+        return listdates
