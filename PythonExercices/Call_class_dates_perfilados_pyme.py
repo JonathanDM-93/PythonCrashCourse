@@ -23,3 +23,9 @@ print(f"FECHA PRESTAMOS ANUALES_0: {fecha_calculada_prestamos_anuales_0}")
 
 fecha_calculada_prestamos_anuales_1 = Ingresar_MasterDate.prestamos_anuales_1()
 print(f"FECHA PRESTAMOS ANUALES_1: {fecha_calculada_prestamos_anuales_1}")
+
+fecha_calculada_prestamos_recientes = Ingresar_MasterDate.prestamos_recientes()
+print(f"FECHA PRESTAMOS RECIENTES: {fecha_calculada_prestamos_recientes}")
+
+fecha_calculada_solovinos = Ingresar_MasterDate.solovinos()
+print(f"FECHA SOLOVINOS: {fecha_calculada_solovinos}")
