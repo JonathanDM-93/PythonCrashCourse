@@ -32,3 +32,6 @@ print(f"FECHA SOLOVINOS: {fecha_calculada_solovinos}")
 
 fecha_calculada_tarjeta = Ingresar_MasterDate.tarjeta()
 print(f"FECHA TARJETA: {fecha_calculada_tarjeta}")
+
+bimestre_calculado = Ingresar_MasterDate.piBimDates()
+print(f"FECHA BIMESTRE: {bimestre_calculado}")
