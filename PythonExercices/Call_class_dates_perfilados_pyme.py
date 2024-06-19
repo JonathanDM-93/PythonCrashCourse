@@ -29,3 +29,6 @@ print(f"FECHA PRESTAMOS RECIENTES: {fecha_calculada_prestamos_recientes}")
 
 fecha_calculada_solovinos = Ingresar_MasterDate.solovinos()
 print(f"FECHA SOLOVINOS: {fecha_calculada_solovinos}")
+
+fecha_calculada_tarjeta = Ingresar_MasterDate.tarjeta()
+print(f"FECHA TARJETA: {fecha_calculada_tarjeta}")

@@ -135,3 +135,20 @@ class MasterDate:
         listdates = [datelastYear, last_day_of_month]
         # Regresa una lista con el formato
         return listdates
+
+    def tarjeta(self):
+        """Calcula tres meses atrás a partir de master_date"""
+        master_date = self.masterFormat()
+
+        # Calcular las fechas deseadas
+        datelastyear = master_date - relativedelta(months=14)
+
+        last_day_of_month = (master_date.replace(day=1) + relativedelta(months=1)) - timedelta(days=1)
+
+        # Regresa las variables en formato de fecha string
+        last_day_of_month = last_day_of_month.strftime('%Y-%m-%d')
+        datelastYear = datelastyear.strftime('%Y-%m-%d')
+
+        listdates = [datelastYear, last_day_of_month]
+        # Regresa una lista con el formato
+        return listdates
