@@ -155,7 +155,7 @@ class MasterDate:
         return listdates
 
 
-    def piBimDates(self):
+    def piBimDates_1(self):
         """Determina a qué bimestre corresponde la fecha maestra y devuelve la fecha del mes que inicia el bimestre"""
         master_date = self.masterFormat()  # Toma la salida del método masterFormat
         # Calcular el bimestre
