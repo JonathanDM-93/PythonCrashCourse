@@ -38,3 +38,6 @@ print(f"FECHA BIMESTRE_1: {bimestre_calculado1}")
 
 bimestre_calculado0 = Ingresar_MasterDate.piBimDates_0()
 print(f"FECHA BIMESTRE_0: {bimestre_calculado0}")
+
+fecha_calculada_cambios_cadena = Ingresar_MasterDate.cambios_cadena_0()
+print(f"FECHA CAMBIOS CADENA: {fecha_calculada_cambios_cadena}")
