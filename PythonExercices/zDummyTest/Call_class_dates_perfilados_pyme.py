@@ -41,3 +41,6 @@ print(f"FECHA BIMESTRE_0: {bimestre_calculado0}")
 
 fecha_calculada_cambios_cadena = Ingresar_MasterDate.cambios_cadena_0()
 print(f"FECHA CAMBIOS CADENA: {fecha_calculada_cambios_cadena}")
+
+three_months_beforeDate = Ingresar_MasterDate.last_three_months()
+print(f"FECHA THREE MONTHS: {three_months_beforeDate}")

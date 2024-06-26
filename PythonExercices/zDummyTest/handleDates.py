@@ -196,3 +196,13 @@ class MasterDate:
         # Regresa una lista con el formato
         conversion = date.strftime('%Y-%m-%d')
         return conversion
+
+    def last_three_months(self):
+        """Calcula tres meses atrás a partir de master_date"""
+        master_date = self.masterFormat()
+
+        # Calcular las fechas deseadas
+        date = master_date - relativedelta(months=3)
+        # Regresa una lista con el formato
+        conversion = date.strftime('%Y-%m-%d')
+        return conversion
