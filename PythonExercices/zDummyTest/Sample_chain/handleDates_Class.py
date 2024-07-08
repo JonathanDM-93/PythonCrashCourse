@@ -19,10 +19,15 @@ class MasterDate:
         master_date = self.masterFormat()  # Toma la salida del método masterFormat
         # Calcular el bimestre
         bimester = math.ceil(master_date.month / 2)
-        # Calcular el mes que inicia el bimestre
-        start_month = (bimester - 1) * 2 + 1
+        # Ajustar el cálculo del mes que inicia el bimestre y el año si es necesario
+        if bimester == 1:
+            start_month = 11
+            start_year = master_date.year - 1
+        else:
+            start_month = (bimester - 1) * 2 - 1
+            start_year = master_date.year
         # Construir la fecha del mes que inicia el bimestre
-        start_date = datetime(master_date.year, start_month, 1)
+        start_date = datetime(start_year, start_month, 1)
         # Formatear la fecha a string
         start_date_str = start_date.strftime('%Y-%m-%d')
         return start_date_str
