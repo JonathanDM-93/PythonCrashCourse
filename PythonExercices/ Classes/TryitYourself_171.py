@@ -44,6 +44,7 @@ restaurante1.set_number_served()
 
 print("\n[*]\n")
 
+
 # Message print: El numero de comensales servidos: 57
 
 # TRY IT YOURSELF pag. 171 9-5 Login Attempts.
@@ -65,16 +66,7 @@ class User:
         # ------------------------------------------ #
         # Agregar un atributo login_attempts
         self.login_attempts = 0
-
-    def describe_user(self):
-        print(f"Esta es tu información:\n"
-              f" [*] Nombre: {self.first_name.title()} \n"
-              f" [*] Apellido: {self.last_name.title()} \n"
-              f" [*] Dirección: {self.address.title()} \n"
-              f" [*] Telefono: {self.telephone.title()}")
-
-    def greet_user(self):
-        print(f"Mucho gusto: {self.first_name.title()} {self.last_name.title()} !")
+        # ------------------------------------------ #
 
     def increment_login_attempts(self, other_client: int):
         self.login_attempts += other_client
