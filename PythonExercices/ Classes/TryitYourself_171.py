@@ -41,8 +41,56 @@ restaurante1.increment_number_served(7)
 
 # Llamar al método que imprime el valor de los comensales
 restaurante1.set_number_served()
+
+print("\n[*]\n")
+
 # Message print: El numero de comensales servidos: 57
 
+# TRY IT YOURSELF pag. 171 9-5 Login Attempts.
+# Agrega un atributo llamado login_attempts a la clase User de la pag.
+# 166. Escribe un método llamado increment_login_attempts() que incremente el valor de login_attempts por 1. Escribe
+# otro método llamado reset_login_attempts() que reinicie el valor a 0 Crea una instancia de la clase User y llama a
+# increment_login_attempts() varias veces. Imprime el valor de login_attempts para verificar que se incrementa. Llama
+# a reset_login_attempts() y verifica que el valor de login_attempts se reinicia a 0
+
+class User:
+    """Initialize attributes"""
+
+    def __init__(self, first_name: str, last_name: str, address: str, telephone: str):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.address = address
+        self.telephone = telephone
+
+        # ------------------------------------------ #
+        # Agregar un atributo login_attempts
+        self.login_attempts = 0
+
+    def describe_user(self):
+        print(f"Esta es tu información:\n"
+              f" [*] Nombre: {self.first_name.title()} \n"
+              f" [*] Apellido: {self.last_name.title()} \n"
+              f" [*] Dirección: {self.address.title()} \n"
+              f" [*] Telefono: {self.telephone.title()}")
+
+    def greet_user(self):
+        print(f"Mucho gusto: {self.first_name.title()} {self.last_name.title()} !")
+
+    def increment_login_attempts(self, other_client: int):
+        self.login_attempts += other_client
+
+    def reset_login_attempts(self):
+        """Reinicia el valor de login_attempts a 0"""
+        self.login_attempts = 0
+
+    def read_clients(self):
+        print(f"El número de clientes: {self.login_attempts}")
 
 
+new_user = User("John", "Malcovich", "Calle 123", "555-1234")
+new_user.increment_login_attempts(15)
+new_user.read_clients()
 
+# Resetear el valor de login_attempts
+new_user.reset_login_attempts()
+new_user.read_clients()
